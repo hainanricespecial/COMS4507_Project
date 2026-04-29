@@ -34,6 +34,10 @@ LangGraph_Agent/
 test imae/
 Plant_Multimodal_Agent/ablation_results/
 COMS4507_Project/samples
+/ablation_results/
+/evaluation_results/
+/paper/
+/samples/
 
 # Common generated ML/data artifacts
 *.pt

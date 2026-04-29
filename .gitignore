@@ -1,0 +1,93 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+
+# Temporary and log files
+*.log
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Local environment files
+.env
+.env.*
+
+# Project folders to keep out of GitHub
+17/
+LangGraph_Agent/
+2026-Week5-mllmrag-demo/
+test imae/
+Plant_Multimodal_Agent/ablation_results/
+COMS4507_Project/samples
+
+# Common generated ML/data artifacts
+*.pt
+*.pth
+*.bin
+*.index
+*.sqlite3
+vector_db/
+chroma_db/
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python cache / virtualenvs
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Logs / temp files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+tmp/
+temp/
+cache/
+
+# Model / vector / database artifacts
+*.pt
+*.pth
+*.ckpt
+*.index
+*.sqlite3
+*.db
+vector_db/
+chroma_db/
+faiss/
+
+# Large project/data folders that should not be pushed
+/17/
+/LangGraph_Agent/
+/2026-Week5-mllmrag-demo/
+
+# data folders
+Plant_Multimodal_Agent/samples
+
+# Generated evaluation result JSON artifacts
+Plant_Multimodal_Agent/evaluation_results/**/*.json

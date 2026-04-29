@@ -1,0 +1,202 @@
+[
+  {
+    "id": "q001",
+    "family": "factual_retrieval",
+    "query": "What disease causes black rot on apple leaves?",
+    "expected_labels": ["Apple Black rot"],
+    "reference_answer": "The most likely diagnosis is Apple Black rot. Remove infected leaves and fruit, prune for airflow, and apply a suitable fungicide program early."
+  },
+  {
+    "id": "q002",
+    "family": "factual_retrieval",
+    "query": "What is the likely disease for grape leaves with black spots?",
+    "expected_labels": ["Grape Black rot"],
+    "reference_answer": "A likely diagnosis is Grape Black rot. Sanitation and a timely fungicide schedule are important to reduce spread."
+  },
+  {
+    "id": "q003",
+    "family": "factual_retrieval",
+    "query": "What disease is associated with gray spots on corn leaves?",
+    "expected_labels": ["Gray Leaf Spot in corn Leaf"],
+    "reference_answer": "Gray Leaf Spot in corn leaf is the likely condition. Use residue management, resistant hybrids, and field scouting."
+  },
+  {
+    "id": "q004",
+    "family": "factual_retrieval",
+    "query": "What is the cause of brown spot in rice leaves?",
+    "expected_labels": ["Brown spot in rice leaf"],
+    "reference_answer": "Brown spot in rice leaf is a likely diagnosis. Improve plant nutrition, manage moisture stress, and apply recommended fungicide if needed."
+  },
+  {
+    "id": "q005",
+    "family": "factual_retrieval",
+    "query": "What disease is likely when tea leaves show brown blight?",
+    "expected_labels": ["brown blight in tea"],
+    "reference_answer": "Brown blight in tea is likely. Remove infected tissue, improve canopy airflow, and follow a suitable fungicide or biocontrol plan."
+  },
+  {
+    "id": "q006",
+    "family": "factual_retrieval",
+    "query": "Tomato leaves have bacterial-like spotting. What disease is this?",
+    "expected_labels": ["Tomato Bacterial spot", "Tomato___Bacterial_spot"],
+    "reference_answer": "Tomato Bacterial spot is a likely diagnosis. Remove infected material, avoid overhead irrigation, and follow a bacterial disease management plan."
+  },
+  {
+    "id": "q007",
+    "family": "cross_modal_retrieval",
+    "query": "What is wrong with this apple leaf?",
+    "query_image": "samples/Apple Black rot/Apple_Black_rot1002.jpg",
+    "expected_labels": ["Apple Black rot"],
+    "reference_answer": "This appears consistent with Apple Black rot. Prioritize sanitation and targeted disease control."
+  },
+  {
+    "id": "q008",
+    "family": "cross_modal_retrieval",
+    "query": "Diagnose this grape leaf image.",
+    "query_image": "samples/Grape Black rot/Grape_Black_rot1.jpg",
+    "expected_labels": ["Grape Black rot"],
+    "reference_answer": "The image is most consistent with Grape Black rot. Remove infected tissue and apply preventive control."
+  },
+  {
+    "id": "q009",
+    "family": "cross_modal_retrieval",
+    "query": "Identify the disease in this corn leaf image.",
+    "query_image": "samples/Gray Leaf Spot in corn Leaf/gray_leaf_spot_in_corn_leaf1009.jpg",
+    "expected_labels": ["Gray Leaf Spot in corn Leaf"],
+    "reference_answer": "This likely shows Gray Leaf Spot in corn leaf. Use resistant varieties and integrated disease management."
+  },
+  {
+    "id": "q010",
+    "family": "cross_modal_retrieval",
+    "query": "What disease does this rice leaf image suggest?",
+    "query_image": "samples/Brown spot in rice leaf/brown_spot_in_rice_leaf106.jpg",
+    "expected_labels": ["Brown spot in rice leaf"],
+    "reference_answer": "The image likely indicates Brown spot in rice leaf. Improve nutrition and apply treatment as advised."
+  },
+  {
+    "id": "q011",
+    "family": "cross_modal_retrieval",
+    "query": "Please diagnose this tea leaf image.",
+    "query_image": "samples/brown blight in tea/brown_blight_in_tea140.jpg",
+    "expected_labels": ["brown blight in tea"],
+    "reference_answer": "This tea leaf appears to show brown blight. Remove infected leaves and improve airflow and disease control."
+  },
+  {
+    "id": "q012",
+    "family": "cross_modal_retrieval",
+    "query": "Use the image and text together to identify the apple disease.",
+    "query_image": "samples/Apple Black rot/Apple_Black_rot1002.jpg",
+    "expected_labels": ["Apple Black rot"],
+    "reference_answer": "Using both image and text cues, Apple Black rot is the strongest match."
+  },
+  {
+    "id": "q013",
+    "family": "analytical_multi_hop",
+    "query": "Find likely diseases with dark rot-like lesions on apple leaves and rank alternatives.",
+    "expected_labels": ["Apple Black rot", "Apple Apple scab"],
+    "reference_answer": "Top likely diagnosis is Apple Black rot, with Apple scab as an alternative depending on lesion pattern and spread."
+  },
+  {
+    "id": "q014",
+    "family": "analytical_multi_hop",
+    "query": "Differentiate brown spot and leaf smut in rice and provide key distinguishing signs.",
+    "expected_labels": ["Brown spot in rice leaf", "Leaf smut in rice leaf"],
+    "reference_answer": "Brown spot often shows distinct brown lesions while leaf smut can show darker sooty symptoms; confirm by lesion appearance and field pattern."
+  },
+  {
+    "id": "q015",
+    "family": "analytical_multi_hop",
+    "query": "Rank top grape diseases for black spotting and explain uncertainty.",
+    "expected_labels": ["Grape Black rot", "Grape Leaf blight Isariopsis Leaf Spot"],
+    "reference_answer": "Grape Black rot is the primary candidate, with grape leaf blight as a secondary possibility; uncertainty depends on lesion shape and progression."
+  },
+  {
+    "id": "q016",
+    "family": "analytical_multi_hop",
+    "query": "Which diseases could explain severe blight-like symptoms in tomato and what checks should I do next?",
+    "expected_labels": ["Tomato Late blight", "Tomato Early blight"],
+    "reference_answer": "Tomato Late blight and Early blight are key candidates; inspect lesion borders, stem involvement, and progression speed for confirmation."
+  },
+  {
+    "id": "q017",
+    "family": "conversational_follow_up",
+    "query": "I likely have Apple Black rot. Give me a practical 7-day action plan.",
+    "expected_labels": ["Apple Black rot"],
+    "reference_answer": "Over 7 days: remove infected tissue, sanitize tools, improve airflow, and start a recommended fungicide schedule with monitoring."
+  },
+  {
+    "id": "q018",
+    "family": "conversational_follow_up",
+    "query": "What should I monitor after treatment to confirm improvement?",
+    "expected_labels": ["Apple Black rot", "Grape Black rot", "Brown spot in rice leaf"],
+    "reference_answer": "Monitor for reduced new lesion formation, slower spread, and healthier new growth over the next 1-2 weeks."
+  },
+  {
+    "id": "q019",
+    "family": "conversational_follow_up",
+    "query": "If symptoms worsen after first treatment, what should I do next?",
+    "expected_labels": ["Apple Black rot", "Grape Black rot", "Tomato Late blight"],
+    "reference_answer": "If worsening occurs, reassess diagnosis, escalate to an alternative approved control, and seek local extension guidance with updated field evidence."
+  },
+  {
+    "id": "q020",
+    "family": "conversational_follow_up",
+    "query": "Give a concise treatment summary for brown blight in tea.",
+    "expected_labels": ["brown blight in tea"],
+    "reference_answer": "For tea brown blight: prune infected leaves, improve canopy airflow, keep field hygiene, and apply suitable disease control promptly."
+  },
+  {
+    "id": "q021",
+    "family": "memory_multi_turn",
+    "thread_id": "tea_organic",
+    "turn_id": 1,
+    "query": "My tea leaves look like brown blight. I prefer low-cost organic treatment. Please remember that.",
+    "expected_labels": ["brown blight in tea"],
+    "reference_answer": "Likely tea brown blight. Since you prefer low-cost organic treatment, start with sanitation, pruning, and approved organic options."
+  },
+  {
+    "id": "q022",
+    "family": "memory_multi_turn",
+    "thread_id": "tea_organic",
+    "turn_id": 2,
+    "query": "Based on my preference, what should I do first this week?",
+    "expected_labels": ["brown blight in tea"],
+    "reference_answer": "Given your low-cost organic preference, first remove infected leaves, clean tools, and improve airflow before considering organic sprays."
+  },
+  {
+    "id": "q023",
+    "family": "memory_multi_turn",
+    "thread_id": "tea_organic",
+    "turn_id": 3,
+    "query": "Summarize the plan in 3 short bullets and include my preference.",
+    "expected_labels": ["brown blight in tea"],
+    "reference_answer": "1) Sanitation and pruning. 2) Improve airflow and monitoring. 3) Use low-cost organic treatment options aligned with your preference."
+  },
+  {
+    "id": "q024",
+    "family": "memory_multi_turn",
+    "thread_id": "rice_weekly",
+    "turn_id": 1,
+    "query": "I suspect brown spot in rice and can spray only once per week. Please remember this constraint.",
+    "expected_labels": ["Brown spot in rice leaf"],
+    "reference_answer": "Likely brown spot in rice. With once-weekly spraying, prioritize timing, field sanitation, and nutrient correction."
+  },
+  {
+    "id": "q025",
+    "family": "memory_multi_turn",
+    "thread_id": "rice_weekly",
+    "turn_id": 2,
+    "query": "Design a weekly treatment schedule using my constraint.",
+    "expected_labels": ["Brown spot in rice leaf"],
+    "reference_answer": "Using your once-weekly spray constraint: choose one effective spray window, monitor midweek, and reinforce with non-chemical management."
+  },
+  {
+    "id": "q026",
+    "family": "memory_multi_turn",
+    "thread_id": "rice_weekly",
+    "turn_id": 3,
+    "query": "Give a short reminder of my condition and spraying limit before your final advice.",
+    "expected_labels": ["Brown spot in rice leaf"],
+    "reference_answer": "You are managing likely brown spot in rice with a once-weekly spray limit; focus on timely application, monitoring, and supportive field practices."
+  }
+]

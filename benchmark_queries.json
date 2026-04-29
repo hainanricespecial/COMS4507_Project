@@ -1,0 +1,82 @@
+[
+  {
+    "family": "factual_retrieval",
+    "query": "What disease is shown for tomato leaves with yellow and brown spots?",
+    "expected_labels": ["Tomato___Bacterial_spot"]
+  },
+  {
+    "family": "factual_retrieval",
+    "query": "What disease causes black rot on apple leaves?",
+    "expected_labels": ["Apple Black rot"]
+  },
+  {
+    "family": "factual_retrieval",
+    "query": "What is the likely disease for grape leaves with black spots?",
+    "expected_labels": ["Grape Black rot"]
+  },
+  {
+    "family": "factual_retrieval",
+    "query": "What is the cause of brown spot in rice leaves?",
+    "expected_labels": ["Brown spot in rice leaf"]
+  },
+  {
+    "family": "factual_retrieval",
+    "query": "What is the likely disease for corn leaves with gray spots?",
+    "expected_labels": ["Gray Leaf Spot in corn Leaf"]
+  },
+  {
+    "family": "cross_modal_retrieval",
+    "query": "What is wrong with this apple leaf?",
+    "query_image": "samples/Apple Black rot/Apple_Black_rot1002.jpg",
+    "expected_labels": ["Apple Black rot"]
+  },
+  {
+    "family": "cross_modal_retrieval",
+    "query": "What is wrong with this grape leaf?",
+    "query_image": "samples/Grape Black rot/Grape_Black_rot1.jpg",
+    "expected_labels": ["Grape Black rot"]
+  },
+  {
+    "family": "cross_modal_retrieval",
+    "query": "What is wrong with this corn leaf?",
+    "query_image": "samples/Gray Leaf Spot in corn Leaf/gray_leaf_spot_in_corn_leaf1009.jpg",
+    "expected_labels": ["Gray Leaf Spot in corn Leaf"]
+  },
+  {
+    "family": "cross_modal_retrieval",
+    "query": "What is wrong with this rice leaf?",
+    "query_image": "samples/Brown spot in rice leaf/brown_spot_in_rice_leaf106.jpg",
+    "expected_labels": ["Brown spot in rice leaf"]
+  },
+  {
+    "family": "cross_modal_retrieval",
+    "query": "What is wrong with this tea leaf?",
+    "query_image": "samples/brown blight in tea/brown_blight_in_tea140.jpg",
+    "expected_labels": ["brown blight in tea"]
+  },
+  {
+    "family": "analytical_multi_hop",
+    "query": "Find likely diseases with powder-like white texture on leaves and rank likely options.",
+    "expected_labels": ["Tomato___powdery_mildew", "Cherry (including sour) Powdery mildew"]
+  },
+  {
+    "family": "analytical_multi_hop",
+    "query": "Which plant diseases can cause leaf smut or blight in rice?",
+    "expected_labels": ["Leaf smut in rice leaf", "Brown spot in rice leaf"]
+  },
+  {
+    "family": "conversational_follow_up",
+    "query": "I need a quick action plan for a likely fungal disease on this plant.",
+    "expected_labels": ["Tomato___Late_blight", "Tomato___Septoria_leaf_spot", "Apple Black rot", "Grape Black rot"]
+  },
+  {
+    "family": "conversational_follow_up",
+    "query": "What should I do if my tea plant has brown blight?",
+    "expected_labels": ["brown blight in tea"]
+  },
+  {
+    "family": "conversational_follow_up",
+    "query": "What is the best way to treat bacterial leaf blight in rice?",
+    "expected_labels": ["Bacterial leaf blight in rice leaf"]
+  }
+]

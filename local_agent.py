@@ -17,6 +17,15 @@ try:
 except ImportError:
     from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig
 
+try:
+    # import helper to prepare dataset when rebuilding index
+    from .build_index import prepare_dataset_for_index
+except Exception:
+    try:
+        from build_index import prepare_dataset_for_index
+    except Exception:
+        prepare_dataset_for_index = None
+
 
 class AgentState(TypedDict):
     user_query: str
@@ -820,10 +829,21 @@ if __name__ == "__main__":
     parser.add_argument("--mode", default="hybrid", choices=["text_only", "image_only", "hybrid", "auto"])
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--use-llm", action="store_true")
+    parser.add_argument("--rebuild", action="store_true", help="Rebuild vector index from dataset before running")
+    parser.add_argument("--dataset-root", default="4", help="Dataset root relative to project (contains images or an images/ subfolder)")
+    parser.add_argument("--text-csv", default="4/pokemon.csv", help="Optional CSV describing images and labels")
     args = parser.parse_args()
 
     root = Path(args.root).resolve()
     store = MultimodalChromaStore(root=root)
+    if getattr(args, "rebuild", False):
+        if prepare_dataset_for_index is None:
+            print("Rebuild requested but dataset preparation helper is unavailable.")
+        else:
+            dataset_path, cure_json = prepare_dataset_for_index(root=root, dataset_root=args.dataset_root, text_csv=args.text_csv)
+            print(f"Rebuilding index from dataset at: {dataset_path} (cure json: {cure_json})")
+            store.build_index(dataset_root=dataset_path, overwrite=True, cure_json_path=cure_json)
+
     store.load_index()
 
     agent = PlantMultimodalAgent(

@@ -9,8 +9,8 @@ try:
     from .local_agent import GenerationConfig, PlantMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 except ImportError:
-    from local_agent import GenerationConfig, PlantMultimodalAgent
-    from vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
+    from COMS4507_Project.local_agent import GenerationConfig, PlantMultimodalAgent
+    from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 
 
 st.set_page_config(page_title="Plant Multimodal Agent", page_icon="🌿", layout="wide")

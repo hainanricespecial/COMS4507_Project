@@ -27,8 +27,8 @@ try:
     from .local_agent import GenerationConfig, PlantMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig
 except ImportError:
-    from local_agent import GenerationConfig, PlantMultimodalAgent
-    from vector_store import MultimodalChromaStore, RetrievalConfig
+    from COMS4507_Project.local_agent import GenerationConfig, PlantMultimodalAgent
+    from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig
 
 
 def _parse_csv(raw: str) -> List[str]:

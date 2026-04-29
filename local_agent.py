@@ -15,7 +15,7 @@ from langgraph.graph import END, StateGraph
 try:
     from .vector_store import MultimodalChromaStore, RetrievalConfig
 except ImportError:
-    from vector_store import MultimodalChromaStore, RetrievalConfig
+    from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig
 
 
 class AgentState(TypedDict):

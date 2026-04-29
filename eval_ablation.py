@@ -10,7 +10,7 @@ import math
 try:
     from .vector_store import MultimodalChromaStore, RetrievalConfig
 except ImportError:
-    from vector_store import MultimodalChromaStore, RetrievalConfig
+    from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig
 
 
 def parse_args() -> argparse.Namespace:

@@ -15,7 +15,7 @@ from langgraph.graph import END, StateGraph
 try:
     from .vector_store import MultimodalChromaStore, RetrievalConfig
 except ImportError:
-    from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig
+    from vector_store import MultimodalChromaStore, RetrievalConfig
 
 try:
     # import helper to prepare dataset when rebuilding index
@@ -52,7 +52,7 @@ class GenerationConfig:
     temperature: float = 0.2
 
 
-class PlantMultimodalAgent:
+class PokemonMultimodalAgent:
     # Cache stopwords on initialization to avoid repeated downloads
     _STOPWORDS = None
 
@@ -214,12 +214,10 @@ class PlantMultimodalAgent:
         q = self._compact(query)
         lowered = q.lower()
         extra_terms: list[str] = []
-        if not any(x in lowered for x in ["symptom", "symptoms"]):
-            extra_terms.append("symptoms")
-        if not any(x in lowered for x in ["treatment", "cure", "management"]):
-            extra_terms.append("treatment")
-        if not any(x in lowered for x in ["disease", "blight", "spot", "rust", "mildew"]):
-            extra_terms.append("plant disease")
+        if not any(x in lowered for x in ["pokemon", "pokémon", "pokedex", "species"]):
+            extra_terms.append("pokemon")
+        if not any(x in lowered for x in ["type", "ability", "move", "evolution", "weakness", "strength"]):
+            extra_terms.append("type")
 
         rewritten = q if not extra_terms else f"{q}. Focus terms: {' '.join(extra_terms)}"
 
@@ -300,20 +298,23 @@ class PlantMultimodalAgent:
 
         q = query.lower().strip()
         retrieval_intent_terms = [
-            "disease",
-            "symptom",
+            "pokemon",
+            "pokémon",
+            "type",
+            "ability",
+            "move",
+            "evolution",
+            "weakness",
+            "strength",
             "identify",
-            "diagnose",
-            "cure",
-            "treatment",
-            "blight",
-            "spot",
-            "rust",
-            "mildew",
-            "deficiency",
-            "leaf",
+            "name",
+            "species",
+            "stats",
+            "what pokemon",
+            "what is this",
             "looks like",
             "look like",
+            "which pokemon",
         ]
         followup_terms = [
             "summarize",
@@ -459,7 +460,7 @@ class PlantMultimodalAgent:
                     [
                         f"[R{i}] Result {i}",
                         f"label: {item['label']}",
-                        f"description/cure: {text_info}",
+                        f"description/info: {text_info}",
                         f"image_name: {item['image_name']}",
                         f"text_score: {item.get('text_score', 0.0):.4f}",
                         f"image_score: {item.get('image_score', 0.0):.4f}",
@@ -472,25 +473,22 @@ class PlantMultimodalAgent:
 
         context = "\n\n".join(context_lines) if context_lines else "No retrieved evidence."
 
-        retrieve_policy = "RETRIEVE" if use_retrieval else "MEMORY_ONLY"
-
         return (
-            "You are a multimodal RAG assistant specializing in plant health diagnosis.\n"
+            "You are a multimodal RAG assistant specializing in Pokémon identification and information.\n"
             "Answer using ONLY retrieved evidence and conversation memory. Do not add unsupported details.\n"
             "If evidence is insufficient, say so clearly.\n\n"
             f"User question: {query}\n"
             f"Conversation memory:\n{memory_context or 'No prior conversation.'}\n\n"
             f"Retrieved evidence:\n{context}\n\n"
             "Instructions:\n"
-            "1. If the user asks to remember a preference/constraint, acknowledge it explicitly and confirm you will track it.\n"
-            "2. If the user asks for a weekly plan, provide a compact schedule based on the evidence and stored constraints.\n"
-            "3. For diagnosis requests, use retrieved evidence to identify the issue. Cite sources as [R1], [R2], etc.\n"
-            "4. When evidence includes images, describe what the image shows and cite the image result number.\n"
-            "5. Provide treatment recommendations ONLY if evidence supports them. Use [R#] citations.\n"
-            "6. If evidence is insufficient, respond with: 'Insufficient evidence to diagnose. Please provide more details about [specific aspect].' instead of guessing.\n\n"
+            "1. For identification requests, use retrieved evidence to identify the Pokémon species and describe its key attributes.\n"
+            "2. Mention Pokémon type(s), abilities, moves, evolution stage, or weaknesses only when supported by evidence.\n"
+            "3. Cite sources as [R1], [R2], etc. whenever you refer to retrieved evidence.\n"
+            "4. If evidence includes images, describe what the image shows and cite the image result number.\n"
+            "5. If evidence is insufficient, respond with: 'Insufficient evidence to identify the Pokémon. Please provide more details or a clearer image.'\n\n"
             "Response format:\n"
             "- Start by describing what text/image evidence shows (or lack thereof).\n"
-            "- If diagnosis is clear: State the issue with [R#] citations, cite treatment/cure steps [R#], suggest next action.\n"
+            "- If identification is clear: State the Pokémon species with [R#] citations, mention key attributes, and suggest next step.\n"
             "- If evidence is mixed/unclear: Explain the uncertainty and ask for clarification.\n"
             "- Keep sentences concise (max 2-3 per section). Do not copy raw retrieval chunks."
         )
@@ -501,19 +499,10 @@ class PlantMultimodalAgent:
             return False, "Empty response."
 
         lower = text.lower()
-        query_l = str(state.get("user_query", "")).lower()
-        is_memory_note_request = self._is_memory_note_request(query_l)
-
-        if is_memory_note_request:
+        if self._is_memory_note_request(state.get("user_query", "").lower()):
             if not any(marker in lower for marker in ["remember", "remembered", "noted", "i’ll remember", "i'll remember", "i will remember"]):
                 return False, "Schema check failed: missing memory acknowledgement."
-            if not any(marker in lower for marker in ["next step", "next steps", "weekly plan", "action plan"]):
-                return False, "Schema check failed: missing next step."
-        else:
-            schema_markers = ["diagnosis", "next step"]
-            missing_schema = [m for m in schema_markers if m not in lower]
-            if missing_schema:
-                return False, f"Schema check failed: missing {', '.join(missing_schema)}."
+            return True, "ok"
 
         use_retrieval = bool(state.get("use_retrieval", True))
         items = state.get("retrieved_items", [])
@@ -530,19 +519,24 @@ class PlantMultimodalAgent:
         return True, "ok"
 
     @staticmethod
-    def _clean_treatment_text(raw_text: str) -> str:
+    def _clean_info_text(raw_text: str) -> str:
         text = re.sub(r"\s+", " ", raw_text or "").strip()
         if not text:
             return ""
 
-        treatment_markers = [
-            "treatment and cure:",
-            "treatment:",
-            "recommended treatment/cure:",
-            "management:",
+        info_markers = [
+            "description:",
+            "type:",
+            "ability:",
+            "abilities:",
+            "moves:",
+            "move:",
+            "evolution:",
+            "base stats:",
+            "info:",
         ]
         lowered = text.lower()
-        for marker in treatment_markers:
+        for marker in info_markers:
             idx = lowered.find(marker)
             if idx >= 0:
                 text = text[idx + len(marker) :].strip()
@@ -575,9 +569,8 @@ class PlantMultimodalAgent:
 
         if self._is_memory_note_request(query):
             if items:
-                diagnosis_hint = str(items[0].get("label", "")).strip() or "this plant issue"
+                pokemon_hint = str(items[0].get("label", "")).strip() or "this Pokémon query"
             elif memory_context:
-                # Fall back to top memory entities when retrieval is intentionally skipped.
                 entities: list[str] = []
                 for span in state.get("memory_spans", []):
                     entities.extend([str(e) for e in span.get("entities", []) if str(e).strip()])
@@ -585,45 +578,37 @@ class PlantMultimodalAgent:
                 for e in entities:
                     if e not in uniq_entities:
                         uniq_entities.append(e)
-                diagnosis_hint = " ".join(uniq_entities[:4]).strip() or "this plant issue"
+                pokemon_hint = " ".join(uniq_entities[:4]).strip() or "this Pokémon query"
             else:
-                diagnosis_hint = "this plant issue"
+                pokemon_hint = "this Pokémon query"
 
-            memory_ack = f"Yes — I’ll remember your preference and constraint for {diagnosis_hint}."
-            if "organic" in query_l or "organic" in memory_context.lower():
-                memory_ack = f"Yes — I’ll remember your low-cost organic preference for {diagnosis_hint}."
-            elif "once per week" in query_l or "once per week" in memory_context.lower():
-                memory_ack = f"Yes — I’ll remember that you can spray only once per week for {diagnosis_hint}."
+            memory_ack = f"Yes — I’ll remember your preference and constraint for {pokemon_hint}."
             if "first" in query_l or "what should i do first" in query_l:
                 return (
                     f"**Memory note:** {memory_ack}\n"
-                    f"**Likely diagnosis:** {diagnosis_hint}\n"
-                    "**First step this week:** remove the most affected leaves, clean tools, and improve airflow first; then consider the lowest-cost organic option that fits your constraint.\n"
-                    "**Next step:** Keep monitoring new symptoms before the next treatment window."
+                    f"**Reference:** {pokemon_hint}\n"
+                    "**Next step:** I will use this preference when giving future Pokémon information."
                 )
             if self._is_schedule_request(query):
                 return (
                     f"**Memory note:** {memory_ack}\n"
-                    f"**Likely diagnosis:** {diagnosis_hint}\n"
-                    "**Weekly plan:**\n"
-                    "- Day 1: inspect affected leaves, remove heavily damaged tissue, and keep records.\n"
-                    "- Midweek: monitor new lesions, reduce excess moisture, and keep the canopy open.\n"
-                    "- Day 7: use your single treatment window if recommended locally, then reassess the crop.\n"
-                    "**Next step:** Keep the same once-per-week limit and review symptom changes before the next treatment window."
+                    f"**Reference:** {pokemon_hint}\n"
+                    "**Plan:** I will keep this preference in mind for future comparisons and recommendations.\n"
+                    "**Next step:** Use this preference when retrieving Pokémon details next time."
                 )
             return (
                 f"**Memory note:** {memory_ack}\n"
-                f"**Likely diagnosis:** {diagnosis_hint}\n"
-                "**Next step:** I will use your remembered preference and constraint in future advice."
+                f"**Reference:** {pokemon_hint}\n"
+                "**Next step:** I will use your remembered preference in future answers."
             )
 
         if not items:
             if not state.get("use_retrieval", True):
                 return (
-                    "I answered from this chat's memory only. If you want a fresh evidence check against the dataset, "
-                    "ask me to re-run retrieval or upload a new image."
+                    "I answered from this chat's memory only. If you want fresh Pokémon evidence, "
+                    "ask me to run retrieval or provide a clearer image."
                 )
-            return "I could not retrieve similar examples. Try a clearer plant image and more specific text query."
+            return "I could not retrieve similar Pokémon. Try a clearer image or a more specific query."
 
         top = items[0]
         unique_labels = []
@@ -633,24 +618,22 @@ class PlantMultimodalAgent:
 
         alt = ", ".join(unique_labels[:3])
 
-        # Extract and normalize cure/treatment information from top result text.
-        cure_text = self._clean_treatment_text(top.get("text", ""))
+        info_text = self._clean_info_text(top.get("text", ""))
 
-        if "concise" in query_l and "treatment" in query_l and "summary" in query_l:
-            concise = cure_text or (
-                "Prune and remove infected leaves, improve airflow by reducing canopy density, "
-                "and apply an approved fungicide or biocontrol option at label rates."
+        if "concise" in query_l and "summary" in query_l:
+            concise = info_text or (
+                "This Pokémon appears to match the top retrieval result. Confirm its type, abilities, and key attributes from the evidence."
             )
             short = concise[:260].rstrip(" ,;:-") + ("." if not concise.endswith(".") else "")
             return (
-                f"**Likely diagnosis:** {top['label']}\n"
-                f"**Concise treatment summary:** {short}\n"
-                "**Next step:** Remove infected leaves this week and reassess new leaf growth in 5-7 days."
+                f"**Likely Pokémon:** {top['label']}\n"
+                f"**Concise info:** {short}\n"
+                "**Next step:** Confirm this match with the image or query details."
             )
 
-        cure_section = ""
-        if cure_text:
-            cure_section = f"\n\n**RECOMMENDED TREATMENT/CURE:** {cure_text}"
+        info_section = ""
+        if info_text:
+            info_section = f"\n\n**Key info:** {info_text}"
 
         evidence = ""
         if items:
@@ -658,12 +641,12 @@ class PlantMultimodalAgent:
             evidence = f"\nEvidence: {', '.join(refs)}"
 
         return (
-            f"**Disease Diagnosis:** {top['label']}\n"
+            f"**Likely Pokémon:** {top['label']}\n"
             f"Confidence (RRF score): {top.get('rrf_score', top.get('fusion_score', 0.0)):.3f}\n"
             f"Top match image: {top['image_path']}\n"
             f"Alternative nearby labels: {alt}"
-            f"{cure_section}{evidence}\n\n"
-            "**Next step:** Inspect the top symptoms against your plant and capture another close-up leaf image for confirmation."
+            f"{info_section}{evidence}\n\n"
+            "**Next step:** Confirm this match against the image or query details."
         )
 
     @staticmethod
@@ -822,7 +805,7 @@ if __name__ == "__main__":
     import argparse
     from pathlib import Path
 
-    parser = argparse.ArgumentParser(description="Local LangGraph multimodal plant agent")
+    parser = argparse.ArgumentParser(description="Local LangGraph multimodal Pokémon agent")
     parser.add_argument("--root", default=".")
     parser.add_argument("--query", required=True)
     parser.add_argument("--query-image", default=None)
@@ -846,7 +829,7 @@ if __name__ == "__main__":
 
     store.load_index()
 
-    agent = PlantMultimodalAgent(
+    agent = PokemonMultimodalAgent(
         store=store,
         generation=GenerationConfig(use_llm=args.use_llm),
     )

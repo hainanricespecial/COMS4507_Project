@@ -9,10 +9,10 @@ from statistics import mean
 from typing import Any
 
 try:
-    from .local_agent import GenerationConfig, PlantMultimodalAgent
+    from .local_agent import GenerationConfig, PokemonMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig
 except ImportError:
-    from local_agent import GenerationConfig, PlantMultimodalAgent
+    from local_agent import GenerationConfig, PokemonMultimodalAgent
     from vector_store import MultimodalChromaStore, RetrievalConfig
 
 
@@ -139,7 +139,7 @@ def main() -> None:
         store.load_index()
 
         for generation_model in generation_models:
-            agent = PlantMultimodalAgent(
+            agent = PokemonMultimodalAgent(
                 store=store,
                 generation=GenerationConfig(
                     use_llm=True,

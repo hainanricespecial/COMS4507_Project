@@ -1,4 +1,4 @@
-"""Plant multimodal agent package."""
+"""Pokémon multimodal agent package."""
 
 from .api_app import app as api_app
 

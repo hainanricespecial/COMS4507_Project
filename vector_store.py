@@ -75,8 +75,8 @@ class MultimodalChromaStore:
         self.root = Path(root).resolve()
         self.vector_dir = self.root / vector_subdir
         self.metadata_path = self.vector_dir / "metadata.json"
-        self.text_collection_name = "plant_text"
-        self.image_collection_name = "plant_image"
+        self.text_collection_name = "pokemon_text"
+        self.image_collection_name = "pokemon_image"
 
         self.requested_model_name = str(model_name).strip()
         self.model_name = self.requested_model_name
@@ -365,7 +365,7 @@ class MultimodalChromaStore:
         for rec in self.records:
             tokens = self._tokenize_for_sparse(self._record_to_sparse_doc(rec))
             if not tokens:
-                tokens = ["plant"]
+                tokens = ["pokemon"]
             tokenized_docs.append(tokens)
             doc_ids.append(rec["id"])
 
@@ -508,15 +508,14 @@ class MultimodalChromaStore:
             
             if cure_text:
                 text_description = (
-                    f"{parent_label} disease. "
-                    f"Symptoms and diagnosis: {symptom_desc}. "
-                    f"Treatment and cure: {cure_text}"
+                    f"{parent_label}. "
+                    f"Description: {symptom_desc}. "
+                    f"Additional info: {cure_text}"
                 )
             else:
-                # For healthy classes, explicitly mark them
                 text_description = (
-                    f"{parent_label} healthy plant, no disease. "
-                    f"This is a normal healthy specimen without disease symptoms."
+                    f"{parent_label}. "
+                    "No extra descriptive information is available for this label."
                 )
 
             records.append(

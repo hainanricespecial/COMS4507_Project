@@ -6,14 +6,14 @@ from pathlib import Path
 import streamlit as st
 
 try:
-    from .local_agent import GenerationConfig, PlantMultimodalAgent
+    from .local_agent import GenerationConfig, PokemonMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 except ImportError:
-    from COMS4507_Project.local_agent import GenerationConfig, PlantMultimodalAgent
-    from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
+    from local_agent import GenerationConfig, PokemonMultimodalAgent
+    from vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 
 
-st.set_page_config(page_title="Plant Multimodal Agent", page_icon="🌿", layout="wide")
+st.set_page_config(page_title="Pokémon Multimodal Agent", page_icon="🧩", layout="wide")
 
 
 @st.cache_resource
@@ -31,9 +31,9 @@ def load_agent(
     enable_query_rewrite: bool,
     enable_query_summarize: bool,
     max_memory_turns: int,
-) -> PlantMultimodalAgent:
+) -> PokemonMultimodalAgent:
     store = load_store(project_root)
-    return PlantMultimodalAgent(
+    return PokemonMultimodalAgent(
         store=store,
         generation=GenerationConfig(use_llm=use_llm, model_name=llm_model),
         enable_query_rewrite=enable_query_rewrite,
@@ -51,7 +51,7 @@ def save_uploaded_image(upload) -> Path:
 
 
 def main() -> None:
-    st.title("Plant Disease Multimodal RAG Agent")
+    st.title("Pokémon Multimodal RAG Agent")
     st.caption("Multimodal embeddings + Chroma + LangGraph with easy ablation controls")
 
     project_root = str(Path(__file__).resolve().parent)
@@ -118,18 +118,18 @@ def main() -> None:
             if msg.get("image"):
                 st.image(msg["image"], caption="uploaded query image", width=280)
 
-    query = st.chat_input("Ask about your plant disease dataset...")
+    query = st.chat_input("Ask about your Pokémon dataset...")
     uploaded = st.file_uploader("Optional query image", type=["jpg", "jpeg", "png", "webp"], accept_multiple_files=False)
 
     # Add helpful guidance message
     if mode in ["text_only", "auto"] and not query:
         st.info(
-            "💡 **Tip for best results:** Upload a leaf image alongside your text query. "
-            "Image-based retrieval is much more accurate than text-only matching for disease diagnosis!"
+            "💡 **Tip for best results:** Upload an image alongside your text query. "
+            "Visual evidence can improve Pokémon identification accuracy."
         )
     elif mode == "text_only":
         st.warning(
-            "⚠️ **Text-only mode**: For more accurate disease diagnosis, consider uploading a leaf image "
+            "⚠️ **Text-only mode**: For better Pokémon matching, consider uploading an image "
             "and switching to 'hybrid' or 'image_only' mode."
         )
 

@@ -24,10 +24,10 @@ except ImportError:
     ollama = None
 
 try:
-    from .local_agent import GenerationConfig, PlantMultimodalAgent
+    from .local_agent import GenerationConfig, PokemonMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig
 except ImportError:
-    from COMS4507_Project.local_agent import GenerationConfig, PlantMultimodalAgent
+    from COMS4507_Project.local_agent import GenerationConfig, PokemonMultimodalAgent
     from COMS4507_Project.vector_store import MultimodalChromaStore, RetrievalConfig
 
 
@@ -1205,7 +1205,7 @@ def _evaluate_embedding_generation_pair(
         memory_state: Dict[str, List[str]] = defaultdict(list)
         memory_chat_state: Dict[str, List[Dict[str, str]]] = defaultdict(list)
 
-        agent = PlantMultimodalAgent(
+        agent = PokemonMultimodalAgent(
             store=store,
             generation=GenerationConfig(
                 use_llm=True,

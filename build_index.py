@@ -78,10 +78,20 @@ def main() -> None:
         text_csv=args.text_csv,
     )
 
+    cure_json_path = cure_json
+    if cure_json_path is None:
+        default_cure_json = Path(args.cure_json)
+        if default_cure_json.is_absolute():
+            candidate = default_cure_json
+        else:
+            candidate = (root / default_cure_json).resolve()
+        if candidate.exists():
+            cure_json_path = str(candidate)
+
     store.build_index(
         dataset_root=dataset_path,
         overwrite=args.overwrite,
-        cure_json_path=cure_json or args.cure_json,
+        cure_json_path=cure_json_path,
         max_images_per_class=args.max_images_per_class,
     )
 
@@ -89,10 +99,6 @@ def main() -> None:
     print(f"Vector DB: {store.vector_dir}")
     print(f"Model used: {store.model_name}")
     print(f"Records indexed: {len(store.records)}")
-
-
-if __name__ == "__main__":
-    main()
 
 
 def _detect_column(header: list[str], choices: list[str]) -> Optional[str]:
@@ -142,8 +148,8 @@ def prepare_dataset_for_index(root: Path, dataset_root: str | Path, text_csv: Op
         reader = csv.DictReader(f)
         header = list(reader.fieldnames or [])
         img_col = _detect_column(header, ["image", "filename", "file", "file_name", "image_name"]) or (header[0] if header else "image")
-        label_col = _detect_column(header, ["label", "class", "type"]) or (header[1] if len(header) > 1 else "label")
-        text_col = _detect_column(header, ["description", "text", "cure", "treatment"]) if header else None
+        label_col = _detect_column(header, ["name", "label", "class", "type"]) or (header[1] if len(header) > 1 else "label")
+        text_col = _detect_column(header, ["description", "text", "evolution"]) if header else None
 
         for row in reader:
             img_name = str(row.get(img_col, "")).strip()
@@ -160,11 +166,19 @@ def prepare_dataset_for_index(root: Path, dataset_root: str | Path, text_csv: Op
                 if alt.exists():
                     src = alt
                 else:
-                    continue
+                    base_name = Path(img_name).name
+                    if not Path(base_name).suffix:
+                        for ext in [".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"]:
+                            alt_ext = (images_base / (base_name + ext)).resolve()
+                            if alt_ext.exists():
+                                src = alt_ext
+                                break
+                    if not src.exists():
+                        continue
 
             dst_dir = tmp_root / label
             dst_dir.mkdir(parents=True, exist_ok=True)
-            dst = dst_dir / Path(img_name).name
+            dst = dst_dir / src.name
             try:
                 # create a symlink when possible to save space
                 if not dst.exists():
@@ -186,3 +200,7 @@ def prepare_dataset_for_index(root: Path, dataset_root: str | Path, text_csv: Op
             json.dump(cure_map, f, indent=2)
 
     return (tmp_root, cure_json_path)
+
+
+if __name__ == "__main__":
+    main()

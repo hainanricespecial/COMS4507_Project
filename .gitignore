@@ -95,3 +95,6 @@ Plant_Multimodal_Agent/samples
 
 # Generated evaluation result JSON artifacts
 Plant_Multimodal_Agent/evaluation_results/**/*.json
+
+# Ignore local copied dataset folder 4
+/4/

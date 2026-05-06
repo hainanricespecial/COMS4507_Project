@@ -32,7 +32,9 @@ load_dotenv()
 # becareful with case sensitivity in model names
 HF_TOKEN = os.getenv("HF_TOKEN")
 DEFAULT_MODEL = os.getenv("HF_MODEL_NAME", "openai/clip-vit-base-patch16").strip()
-DEFAULT_VECTOR_SUBDIR = os.getenv("PMA_VECTOR_SUBDIR", "vector_db/chroma").strip()
+#DEFAULT_VECTOR_SUBDIR = os.getenv("PMA_VECTOR_SUBDIR", "vector_db/chroma").strip()
+DEFAULT_VECTOR_SUBDIR = os.getenv("PMA_VECTOR_SUBDIR", "vector_dbPOISONEDIMAGE/chroma").strip()
+
 SUPPORTED_MODELS = {
     "openai/clip-vit-base-patch32": "clip",
     "openai/clip-vit-base-patch16": "clip",

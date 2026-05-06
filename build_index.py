@@ -19,8 +19,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--root", default=".", help="Project root containing this folder")
     parser.add_argument(
         "--dataset-root",
-        default="4",
-        help="Path to image dataset root (default: 4)",
+        default="4POISONEDIMAGE",
+        help="Path to image dataset root (default: 4POISONEDIMAGE)",
     )
     parser.add_argument(
         "--text-csv",
@@ -48,7 +48,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--vector-subdir",
-        default="vector_db/chroma",
+        default="vector_dbPOISONEDIMAGE/chroma",
         help="Relative output directory for the index, e.g. vector_db/chroma_clip16",
     )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing vector DB")

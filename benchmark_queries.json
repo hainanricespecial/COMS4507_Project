@@ -1,82 +1,187 @@
 [
   {
-    "family": "factual_retrieval",
-    "query": "What disease is shown for tomato leaves with yellow and brown spots?",
-    "expected_labels": ["Tomato___Bacterial_spot"]
+    "id": "q001",
+    "family": "image_to_name_retrieval",
+    "query": "What is the name of the Pokemon in this image?",
+    "query_image": "4/images/bulbasaur.png",
+    "expected_labels": ["bulbasaur"],
+    "reference_answer": "This is Bulbasaur, a Grass/Poison-type Pokemon known as the Grass-type starter from Generation 1."
   },
   {
-    "family": "factual_retrieval",
-    "query": "What disease causes black rot on apple leaves?",
-    "expected_labels": ["Apple Black rot"]
+    "id": "q002",
+    "family": "image_to_name_retrieval",
+    "query": "Identify the Pokemon shown in this image.",
+    "query_image": "4/images/charmander.png",
+    "expected_labels": ["charmander"],
+    "reference_answer": "This is Charmander, a Fire-type Pokemon and the Fire-type starter from Generation 1."
   },
   {
-    "family": "factual_retrieval",
-    "query": "What is the likely disease for grape leaves with black spots?",
-    "expected_labels": ["Grape Black rot"]
+    "id": "q003",
+    "family": "image_to_name_retrieval",
+    "query": "What Pokemon is depicted in this image?",
+    "query_image": "4/images/squirtle.png",
+    "expected_labels": ["squirtle"],
+    "reference_answer": "This is Squirtle, a Water-type Pokemon and the Water-type starter from Generation 1."
   },
   {
-    "family": "factual_retrieval",
-    "query": "What is the cause of brown spot in rice leaves?",
-    "expected_labels": ["Brown spot in rice leaf"]
+    "id": "q004",
+    "family": "image_to_name_retrieval",
+    "query": "Can you tell me the name of this Pokemon from the image?",
+    "query_image": "4/images/pikachu.png",
+    "expected_labels": ["pikachu"],
+    "reference_answer": "This is Pikachu, an Electric-type Pokemon famous for being the iconic mascot of the Pokemon franchise."
   },
   {
-    "family": "factual_retrieval",
-    "query": "What is the likely disease for corn leaves with gray spots?",
-    "expected_labels": ["Gray Leaf Spot in corn Leaf"]
+    "id": "q005",
+    "family": "image_to_name_retrieval",
+    "query": "What is the Pokemon species shown in this image?",
+    "query_image": "4/images/eevee.png",
+    "expected_labels": ["eevee"],
+    "reference_answer": "This is Eevee, a Normal-type Pokemon known for having multiple possible evolutions depending on various conditions."
   },
   {
-    "family": "cross_modal_retrieval",
-    "query": "What is wrong with this apple leaf?",
-    "query_image": "samples/Apple Black rot/Apple_Black_rot1002.jpg",
-    "expected_labels": ["Apple Black rot"]
+    "id": "q006",
+    "family": "name_to_image_retrieval",
+    "query": "Find an image of Dragonite.",
+    "expected_labels": ["4/images/dragonite.png"],
+    "reference_answer": "Dragonite is a Dragon/Flying-type Pokemon and the final evolution of Dratini, known for high stats and strong combat abilities."
   },
   {
-    "family": "cross_modal_retrieval",
-    "query": "What is wrong with this grape leaf?",
-    "query_image": "samples/Grape Black rot/Grape_Black_rot1.jpg",
-    "expected_labels": ["Grape Black rot"]
+    "id": "q007",
+    "family": "name_to_image_retrieval",
+    "query": "Retrieve an image showing Gyarados.",
+    "expected_labels": ["4/images/gyarados.png"],
+    "reference_answer": "Gyarados is a Water/Flying-type Pokemon evolved from Magikarp, known for its impressive size and power compared to its pre-evolution."
   },
   {
-    "family": "cross_modal_retrieval",
-    "query": "What is wrong with this corn leaf?",
-    "query_image": "samples/Gray Leaf Spot in corn Leaf/gray_leaf_spot_in_corn_leaf1009.jpg",
-    "expected_labels": ["Gray Leaf Spot in corn Leaf"]
+    "id": "q008",
+    "family": "name_to_image_retrieval",
+    "query": "Show me a picture of Charizard.",
+    "expected_labels": ["4/images/charizard.png"],
+    "reference_answer": "Charizard is a Fire/Flying-type Pokemon and the final evolution of Charmander, one of the most iconic Pokemon starters."
   },
   {
-    "family": "cross_modal_retrieval",
-    "query": "What is wrong with this rice leaf?",
-    "query_image": "samples/Brown spot in rice leaf/brown_spot_in_rice_leaf106.jpg",
-    "expected_labels": ["Brown spot in rice leaf"]
+    "id": "q009",
+    "family": "name_to_image_retrieval",
+    "query": "Find the image of Blastoise.",
+    "expected_labels": ["4/images/blastoise.png"],
+    "reference_answer": "Blastoise is a Water-type Pokemon and the final evolution of Squirtle, characterized by cannons on its shell for water attacks."
   },
   {
-    "family": "cross_modal_retrieval",
-    "query": "What is wrong with this tea leaf?",
-    "query_image": "samples/brown blight in tea/brown_blight_in_tea140.jpg",
-    "expected_labels": ["brown blight in tea"]
+    "id": "q010",
+    "family": "name_to_image_retrieval",
+    "query": "Locate an image of Venusaur.",
+    "expected_labels": ["4/images/venusaur.png"],
+    "reference_answer": "Venusaur is a Grass/Poison-type Pokemon and the final evolution of Bulbasaur, featuring a large flower bloom on its back."
   },
   {
-    "family": "analytical_multi_hop",
-    "query": "Find likely diseases with powder-like white texture on leaves and rank likely options.",
-    "expected_labels": ["Tomato___powdery_mildew", "Cherry (including sour) Powdery mildew"]
+    "id": "q011",
+    "family": "type_retrieval",
+    "query": "What are the types of Charizard?",
+    "expected_labels": ["Fire", "Flying"],
+    "reference_answer": "Charizard is a Fire/Flying-type Pokemon, combining fire attacks with flying abilities and weaknesses to rock, water, and electric moves."
   },
   {
-    "family": "analytical_multi_hop",
-    "query": "Which plant diseases can cause leaf smut or blight in rice?",
-    "expected_labels": ["Leaf smut in rice leaf", "Brown spot in rice leaf"]
+    "id": "q012",
+    "family": "type_retrieval",
+    "query": "What type is Blastoise?",
+    "expected_labels": ["Water"],
+    "reference_answer": "Blastoise is a Water-type Pokemon, specializing in water-based attacks and resistant to fire, ice, water, and steel-type moves."
   },
   {
-    "family": "conversational_follow_up",
-    "query": "I need a quick action plan for a likely fungal disease on this plant.",
-    "expected_labels": ["Tomato___Late_blight", "Tomato___Septoria_leaf_spot", "Apple Black rot", "Grape Black rot"]
+    "id": "q013",
+    "family": "type_retrieval",
+    "query": "What are the type(s) of Venusaur?",
+    "expected_labels": ["Grass", "Poison"],
+    "reference_answer": "Venusaur is a Grass/Poison-type Pokemon, combining plant-based attacks with poison abilities and weaknesses to fire, flying, and ice moves."
   },
   {
-    "family": "conversational_follow_up",
-    "query": "What should I do if my tea plant has brown blight?",
-    "expected_labels": ["brown blight in tea"]
+    "id": "q014",
+    "family": "type_retrieval",
+    "query": "What is the primary type of Raichu?",
+    "expected_labels": ["Electric"],
+    "reference_answer": "Raichu is an Electric-type Pokemon, evolved from Pikachu, specializing in powerful electric attacks and speed."
   },
   {
-    "family": "conversational_follow_up",
-    "query": "What is the best way to treat bacterial leaf blight in rice?",
-    "expected_labels": ["Bacterial leaf blight in rice leaf"]
+    "id": "q015",
+    "family": "type_retrieval",
+    "query": "What types does Gyarados have?",
+    "expected_labels": ["Water", "Flying"],
+    "reference_answer": "Gyarados is a Water/Flying-type Pokemon with high attack stats, combining water moves with aerial capabilities."
+  },
+  {
+    "id": "q016",
+    "family": "evolution_retrieval",
+    "query": "What is the evolution of Charmander?",
+    "expected_labels": ["charmeleon"],
+    "reference_answer": "Charmander evolves into Charmeleon, which is a Fire-type Pokemon that grows stronger before its final evolution into Charizard."
+  },
+  {
+    "id": "q017",
+    "family": "evolution_retrieval",
+    "query": "What Pokemon does Bulbasaur evolve into?",
+    "expected_labels": ["ivysaur"],
+    "reference_answer": "Bulbasaur evolves into Ivysaur, a Grass/Poison-type Pokemon where the bulb on its back begins to bloom."
+  },
+  {
+    "id": "q018",
+    "family": "evolution_retrieval",
+    "query": "What is the next evolution of Squirtle?",
+    "expected_labels": ["wartortle"],
+    "reference_answer": "Squirtle evolves into Wartortle, a Water-type Pokemon that develops more defined features and ears before its final evolution into Blastoise."
+  },
+  {
+    "id": "q019",
+    "family": "evolution_retrieval",
+    "query": "What does Pikachu evolve into?",
+    "expected_labels": ["raichu"],
+    "reference_answer": "Pikachu evolves into Raichu, an Electric-type Pokemon with increased size, power, and more formidable electric attacks."
+  },
+  {
+    "id": "q020",
+    "family": "evolution_retrieval",
+    "query": "Into which Pokemon does Dratini evolve?",
+    "expected_labels": ["dragonair"],
+    "reference_answer": "Dratini evolves into Dragonair, a Dragon-type Pokemon with a more serpentine form, which further evolves into the powerful Dragonite."
+  },
+  {
+    "id": "q021",
+    "family": "evolution_image_retrieval",
+    "query": "What Pokemon evolves into this one shown in the image?",
+    "query_image": "4/images/charizard.png",
+    "expected_labels": ["charmeleon"],
+    "reference_answer": "Charmeleon evolves into Charizard. Charmeleon is the intermediate Fire-type evolution between Charmander and Charizard."
+  },
+  {
+    "id": "q022",
+    "family": "evolution_image_retrieval",
+    "query": "Which Pokemon is the pre-evolution of the Pokemon shown in this image?",
+    "query_image": "4/images/blastoise.png",
+    "expected_labels": ["wartortle"],
+    "reference_answer": "Wartortle is the pre-evolution of Blastoise. It is the middle stage Water-type evolution between Squirtle and Blastoise."
+  },
+  {
+    "id": "q023",
+    "family": "evolution_image_retrieval",
+    "query": "What is the direct evolution of the Pokemon in this image?",
+    "query_image": "4/images/bulbasaur.png",
+    "expected_labels": ["ivysaur"],
+    "reference_answer": "Bulbasaur evolves into Ivysaur, where the bulb on its back develops green coloring as it prepares to bloom."
+  },
+  {
+    "id": "q024",
+    "family": "evolution_image_retrieval",
+    "query": "Which Pokemon evolves from the one shown in this image?",
+    "query_image": "4/images/pikachu.png",
+    "expected_labels": ["raichu"],
+    "reference_answer": "Pikachu evolves into Raichu when exposed to a Thunder Stone, becoming a larger and more powerful Electric-type Pokemon."
+  },
+  {
+    "id": "q025",
+    "family": "evolution_image_retrieval",
+    "query": "What is the pre-evolution of the Pokemon depicted in this image?",
+    "query_image": "4/images/dragonite.png",
+    "expected_labels": ["dragonair"],
+    "reference_answer": "Dragonair is the pre-evolution of Dragonite. Dragonair evolves into Dragonite at level 55, gaining the Dragon/Flying typing."
   }
 ]

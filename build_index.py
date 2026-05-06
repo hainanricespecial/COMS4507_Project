@@ -15,7 +15,7 @@ except ImportError:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build Chroma index for plant multimodal RAG")
+    parser = argparse.ArgumentParser(description="Build Chroma index for Pokemon RAG")
     parser.add_argument("--root", default=".", help="Project root containing this folder")
     parser.add_argument(
         "--dataset-root",

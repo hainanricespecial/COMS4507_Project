@@ -1,0 +1,7 @@
+Edit this benchmark file to have questions related to the dataset in the folder "4".
+
+I want 5 questions of finding the name of Pokemon based on its image.
+I want 5 questions of finding an image of the Pokemon based on the name.
+I want 5 questions on the types of a specific Pokemon.
+I want 5 questions on the evolutions of Pokemon.
+I want 5 questions of finding an evolution of a Pokemon based on its image.

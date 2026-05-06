@@ -50,6 +50,52 @@ def save_uploaded_image(upload) -> Path:
     return path
 
 
+def try_load_image(image_path: str):
+    """Return image bytes if the path exists and is readable, else None."""
+    try:
+        p = Path(image_path)
+        if p.exists() and p.is_file():
+            return p.read_bytes()
+    except Exception:
+        pass
+    return None
+
+
+def render_retrieved_evidence(items: list[dict]) -> None:
+    """Render the retrieved evidence section with images where available."""
+    st.markdown("### Retrieved evidence")
+
+    if not items:
+        st.caption("No evidence retrieved.")
+        return
+
+    for i, item in enumerate(items, start=1):
+        rrf    = item.get("rrf_score", item.get("fusion_score", 0.0))
+        dense  = item.get("dense_score",  0.0)
+        sparse = item.get("sparse_score", 0.0)
+        text_s = item.get("text_score",   0.0)
+        img_s  = item.get("image_score",  0.0)
+        path   = item.get("image_path", "")
+
+        col_text, col_img = st.columns([3, 1])
+
+        with col_text:
+            st.markdown(
+                f"**{i}. {item['label']}** | "
+                f"rrf={rrf:.3f} "
+                f"(dense={dense:.3f}, sparse={sparse:.3f}, "
+                f"text={text_s:.3f}, image={img_s:.3f})"
+            )
+            st.caption(path)
+
+        with col_img:
+            img_bytes = try_load_image(path)
+            if img_bytes:
+                st.image(img_bytes, use_container_width=True)
+            else:
+                st.caption("image unavailable")
+
+
 def main() -> None:
     st.title("Pokémon Multimodal RAG Agent")
     st.caption("Multimodal embeddings + Chroma + LangGraph with easy ablation controls")
@@ -188,16 +234,7 @@ def main() -> None:
                 f"Reason: {out.get('retrieval_decision_reason', '')}"
             )
 
-            st.markdown("### Retrieved evidence")
-            for i, item in enumerate(out["retrieved_items"], start=1):
-                st.markdown(
-                    (
-                        f"{i}. **{item['label']}** | rrf={item.get('rrf_score', item['fusion_score']):.3f} "
-                        f"(dense={item.get('dense_score', 0.0):.3f}, sparse={item.get('sparse_score', 0.0):.3f}, "
-                        f"text={item['text_score']:.3f}, image={item['image_score']:.3f})"
-                    )
-                )
-                st.caption(item["image_path"])
+            render_retrieved_evidence(out["retrieved_items"])
 
         st.session_state.messages.append({"role": "assistant", "content": out["answer"]})
 

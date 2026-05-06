@@ -6,14 +6,14 @@ from pathlib import Path
 import streamlit as st
 
 try:
-    from .local_agent import GenerationConfig, PlantMultimodalAgent
+    from .local_agent import GenerationConfig, PokemonMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 except ImportError:
-    from local_agent import GenerationConfig, PlantMultimodalAgent
+    from local_agent import GenerationConfig, PokemonMultimodalAgent
     from vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 
 
-st.set_page_config(page_title="Plant Multimodal Agent", page_icon="🌿", layout="wide")
+st.set_page_config(page_title="Pokémon Multimodal Agent", page_icon="🧩", layout="wide")
 
 
 @st.cache_resource
@@ -31,9 +31,9 @@ def load_agent(
     enable_query_rewrite: bool,
     enable_query_summarize: bool,
     max_memory_turns: int,
-) -> PlantMultimodalAgent:
+) -> PokemonMultimodalAgent:
     store = load_store(project_root)
-    return PlantMultimodalAgent(
+    return PokemonMultimodalAgent(
         store=store,
         generation=GenerationConfig(use_llm=use_llm, model_name=llm_model),
         enable_query_rewrite=enable_query_rewrite,
@@ -97,7 +97,7 @@ def render_retrieved_evidence(items: list[dict]) -> None:
 
 
 def main() -> None:
-    st.title("Plant Disease Multimodal RAG Agent")
+    st.title("Pokémon Multimodal RAG Agent")
     st.caption("Multimodal embeddings + Chroma + LangGraph with easy ablation controls")
 
     project_root = str(Path(__file__).resolve().parent)
@@ -164,30 +164,27 @@ def main() -> None:
             if msg.get("image"):
                 st.image(msg["image"], caption="uploaded query image", width=280)
 
-    query    = st.chat_input("Ask about your plant disease dataset...")
-    uploaded = st.file_uploader(
-        "Optional query image",
-        type=["jpg", "jpeg", "png", "webp"],
-        accept_multiple_files=False,
-    )
+    query = st.chat_input("Ask about your Pokémon dataset...")
+    uploaded = st.file_uploader("Optional query image", type=["jpg", "jpeg", "png", "webp"], accept_multiple_files=False)
 
+    # Add helpful guidance message
     if mode in ["text_only", "auto"] and not query:
         st.info(
-            "💡 **Tip:** Upload a leaf image alongside your text query. "
-            "Image-based retrieval is much more accurate for disease diagnosis."
+            "💡 **Tip for best results:** Upload an image alongside your text query. "
+            "Visual evidence can improve Pokémon identification accuracy."
         )
     elif mode == "text_only":
         st.warning(
-            "⚠️ **Text-only mode:** For more accurate diagnosis, upload a leaf image "
-            "and switch to 'hybrid' or 'image_only' mode."
+            "⚠️ **Text-only mode**: For better Pokémon matching, consider uploading an image "
+            "and switching to 'hybrid' or 'image_only' mode."
         )
 
     if query:
-        img_path   = None
+        img_path = None
         show_image = None
         if uploaded is not None:
-            saved      = save_uploaded_image(uploaded)
-            img_path   = ensure_relative_to_root(project_root, saved)
+            saved = save_uploaded_image(uploaded)
+            img_path = ensure_relative_to_root(project_root, saved)
             show_image = str(saved)
 
         st.session_state.messages.append({"role": "user", "content": query, "image": show_image})
@@ -217,15 +214,13 @@ def main() -> None:
                 current_model_info = agent.store.get_embedding_model_info(ensure_loaded=False)
 
             st.markdown(out["answer"])
-
-            model_type            = current_model_info["model_type"] or "unknown"
-            generation_mode_used  = out.get("generation_mode_used",  "unknown")
+            model_type = current_model_info["model_type"] or "unknown"
+            generation_mode_used = out.get("generation_mode_used", "unknown")
             generation_model_used = out.get("generation_model_used", "unknown")
             st.caption(
-                f"Embedding: {current_model_info['active_model']} ({model_type}) | "
-                f"Generation: {generation_model_used} ({generation_mode_used})"
+                f"Embedding backend used: {current_model_info['active_model']} ({model_type}) | "
+                f"Generation used: {generation_model_used} ({generation_mode_used})"
             )
-
             generation_note = out.get("generation_note", "")
             if generation_note:
                 st.warning(generation_note)

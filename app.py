@@ -6,14 +6,14 @@ from pathlib import Path
 import streamlit as st
 
 try:
-    from .local_agent import GenerationConfig, PokemonMultimodalAgent
+    from .local_agent import GenerationConfig, PlantMultimodalAgent
     from .vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 except ImportError:
-    from local_agent import GenerationConfig, PokemonMultimodalAgent
+    from local_agent import GenerationConfig, PlantMultimodalAgent
     from vector_store import MultimodalChromaStore, RetrievalConfig, ensure_relative_to_root
 
 
-st.set_page_config(page_title="Pokémon Multimodal Agent", page_icon="🧩", layout="wide")
+st.set_page_config(page_title="Plant Multimodal Agent", page_icon="🌿", layout="wide")
 
 
 @st.cache_resource
@@ -31,9 +31,9 @@ def load_agent(
     enable_query_rewrite: bool,
     enable_query_summarize: bool,
     max_memory_turns: int,
-) -> PokemonMultimodalAgent:
+) -> PlantMultimodalAgent:
     store = load_store(project_root)
-    return PokemonMultimodalAgent(
+    return PlantMultimodalAgent(
         store=store,
         generation=GenerationConfig(use_llm=use_llm, model_name=llm_model),
         enable_query_rewrite=enable_query_rewrite,
@@ -50,8 +50,54 @@ def save_uploaded_image(upload) -> Path:
     return path
 
 
+def try_load_image(image_path: str):
+    """Return image bytes if the path exists and is readable, else None."""
+    try:
+        p = Path(image_path)
+        if p.exists() and p.is_file():
+            return p.read_bytes()
+    except Exception:
+        pass
+    return None
+
+
+def render_retrieved_evidence(items: list[dict]) -> None:
+    """Render the retrieved evidence section with images where available."""
+    st.markdown("### Retrieved evidence")
+
+    if not items:
+        st.caption("No evidence retrieved.")
+        return
+
+    for i, item in enumerate(items, start=1):
+        rrf    = item.get("rrf_score", item.get("fusion_score", 0.0))
+        dense  = item.get("dense_score",  0.0)
+        sparse = item.get("sparse_score", 0.0)
+        text_s = item.get("text_score",   0.0)
+        img_s  = item.get("image_score",  0.0)
+        path   = item.get("image_path", "")
+
+        col_text, col_img = st.columns([3, 1])
+
+        with col_text:
+            st.markdown(
+                f"**{i}. {item['label']}** | "
+                f"rrf={rrf:.3f} "
+                f"(dense={dense:.3f}, sparse={sparse:.3f}, "
+                f"text={text_s:.3f}, image={img_s:.3f})"
+            )
+            st.caption(path)
+
+        with col_img:
+            img_bytes = try_load_image(path)
+            if img_bytes:
+                st.image(img_bytes, use_container_width=True)
+            else:
+                st.caption("image unavailable")
+
+
 def main() -> None:
-    st.title("Pokémon Multimodal RAG Agent")
+    st.title("Plant Disease Multimodal RAG Agent")
     st.caption("Multimodal embeddings + Chroma + LangGraph with easy ablation controls")
 
     project_root = str(Path(__file__).resolve().parent)
@@ -118,27 +164,30 @@ def main() -> None:
             if msg.get("image"):
                 st.image(msg["image"], caption="uploaded query image", width=280)
 
-    query = st.chat_input("Ask about your Pokémon dataset...")
-    uploaded = st.file_uploader("Optional query image", type=["jpg", "jpeg", "png", "webp"], accept_multiple_files=False)
+    query    = st.chat_input("Ask about your plant disease dataset...")
+    uploaded = st.file_uploader(
+        "Optional query image",
+        type=["jpg", "jpeg", "png", "webp"],
+        accept_multiple_files=False,
+    )
 
-    # Add helpful guidance message
     if mode in ["text_only", "auto"] and not query:
         st.info(
-            "💡 **Tip for best results:** Upload an image alongside your text query. "
-            "Visual evidence can improve Pokémon identification accuracy."
+            "💡 **Tip:** Upload a leaf image alongside your text query. "
+            "Image-based retrieval is much more accurate for disease diagnosis."
         )
     elif mode == "text_only":
         st.warning(
-            "⚠️ **Text-only mode**: For better Pokémon matching, consider uploading an image "
-            "and switching to 'hybrid' or 'image_only' mode."
+            "⚠️ **Text-only mode:** For more accurate diagnosis, upload a leaf image "
+            "and switch to 'hybrid' or 'image_only' mode."
         )
 
     if query:
-        img_path = None
+        img_path   = None
         show_image = None
         if uploaded is not None:
-            saved = save_uploaded_image(uploaded)
-            img_path = ensure_relative_to_root(project_root, saved)
+            saved      = save_uploaded_image(uploaded)
+            img_path   = ensure_relative_to_root(project_root, saved)
             show_image = str(saved)
 
         st.session_state.messages.append({"role": "user", "content": query, "image": show_image})
@@ -168,13 +217,15 @@ def main() -> None:
                 current_model_info = agent.store.get_embedding_model_info(ensure_loaded=False)
 
             st.markdown(out["answer"])
-            model_type = current_model_info["model_type"] or "unknown"
-            generation_mode_used = out.get("generation_mode_used", "unknown")
+
+            model_type            = current_model_info["model_type"] or "unknown"
+            generation_mode_used  = out.get("generation_mode_used",  "unknown")
             generation_model_used = out.get("generation_model_used", "unknown")
             st.caption(
-                f"Embedding backend used: {current_model_info['active_model']} ({model_type}) | "
-                f"Generation used: {generation_model_used} ({generation_mode_used})"
+                f"Embedding: {current_model_info['active_model']} ({model_type}) | "
+                f"Generation: {generation_model_used} ({generation_mode_used})"
             )
+
             generation_note = out.get("generation_note", "")
             if generation_note:
                 st.warning(generation_note)
@@ -188,16 +239,7 @@ def main() -> None:
                 f"Reason: {out.get('retrieval_decision_reason', '')}"
             )
 
-            st.markdown("### Retrieved evidence")
-            for i, item in enumerate(out["retrieved_items"], start=1):
-                st.markdown(
-                    (
-                        f"{i}. **{item['label']}** | rrf={item.get('rrf_score', item['fusion_score']):.3f} "
-                        f"(dense={item.get('dense_score', 0.0):.3f}, sparse={item.get('sparse_score', 0.0):.3f}, "
-                        f"text={item['text_score']:.3f}, image={item['image_score']:.3f})"
-                    )
-                )
-                st.caption(item["image_path"])
+            render_retrieved_evidence(out["retrieved_items"])
 
         st.session_state.messages.append({"role": "assistant", "content": out["answer"]})
 

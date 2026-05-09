@@ -3,41 +3,41 @@
     "id": "q001",
     "family": "image_to_name_retrieval",
     "query": "What is the name of the Pokemon in this image?",
-    "query_image": "4/images/bulbasaur.png",
-    "expected_labels": ["bulbasaur"],
-    "reference_answer": "This is Bulbasaur, a Grass/Poison-type Pokemon known as the Grass-type starter from Generation 1."
+    "query_image": "4/images/fearow.png",
+    "expected_labels": ["fearow"],
+    "reference_answer": "This is Fearow, a Normal/Flying-type Pokemon known for its long beak and high-speed flight."
   },
   {
     "id": "q002",
     "family": "image_to_name_retrieval",
     "query": "Identify the Pokemon shown in this image.",
-    "query_image": "4/images/charmander.png",
-    "expected_labels": ["charmander"],
-    "reference_answer": "This is Charmander, a Fire-type Pokemon and the Fire-type starter from Generation 1."
+    "query_image": "4/images/zapdos.png",
+    "expected_labels": ["zapdos"],
+    "reference_answer": "This is Zapdos, a Electric/Flying-type Pokemon and one of the legendary birds from Generation 1."
   },
   {
     "id": "q003",
     "family": "image_to_name_retrieval",
     "query": "What Pokemon is depicted in this image?",
-    "query_image": "4/images/squirtle.png",
-    "expected_labels": ["squirtle"],
-    "reference_answer": "This is Squirtle, a Water-type Pokemon and the Water-type starter from Generation 1."
+    "query_image": "4/images/charizard.png",
+    "expected_labels": ["charizard"],
+    "reference_answer": "This is Charizard, a Fire/Flying-type Pokemon and the final evolution of Charmander."
   },
   {
     "id": "q004",
     "family": "image_to_name_retrieval",
     "query": "Can you tell me the name of this Pokemon from the image?",
-    "query_image": "4/images/pikachu.png",
-    "expected_labels": ["pikachu"],
-    "reference_answer": "This is Pikachu, an Electric-type Pokemon famous for being the iconic mascot of the Pokemon franchise."
+    "query_image": "4/images/dialga.png",
+    "expected_labels": ["dialga"],
+    "reference_answer": "This is Dialga, a Steel/Dragon-type Pokemon and one of the Legendary beasts from Generation 4."
   },
   {
     "id": "q005",
     "family": "image_to_name_retrieval",
     "query": "What is the Pokemon species shown in this image?",
-    "query_image": "4/images/eevee.png",
-    "expected_labels": ["eevee"],
-    "reference_answer": "This is Eevee, a Normal-type Pokemon known for having multiple possible evolutions depending on various conditions."
+    "query_image": "4/images/venusaur.png",
+    "expected_labels": ["venusaur"],
+    "reference_answer": "This is Venusaur, a Grass/Poison-type Pokemon and the final evolution of Ivysaur."
   },
   {
     "id": "q006",
@@ -49,16 +49,16 @@
   {
     "id": "q007",
     "family": "name_to_image_retrieval",
-    "query": "Retrieve an image showing Gyarados.",
-    "expected_labels": ["4/images/gyarados.png"],
-    "reference_answer": "Gyarados is a Water/Flying-type Pokemon evolved from Magikarp, known for its impressive size and power compared to its pre-evolution."
+    "query": "Retrieve an image showing Raikou.",
+    "expected_labels": ["4/images/raikou.png"],
+    "reference_answer": "Raikou is an Electric-type Pokemon and one of the Legendary beasts from Generation 2."
   },
   {
     "id": "q008",
     "family": "name_to_image_retrieval",
-    "query": "Show me a picture of Charizard.",
-    "expected_labels": ["4/images/charizard.png"],
-    "reference_answer": "Charizard is a Fire/Flying-type Pokemon and the final evolution of Charmander, one of the most iconic Pokemon starters."
+    "query": "Show me a picture of Teddiursa.",
+    "expected_labels": ["4/images/teddiursa.png"],
+    "reference_answer": "Teddiursa is a Normal-type Pokemon."
   },
   {
     "id": "q009",
@@ -84,9 +84,9 @@
   {
     "id": "q012",
     "family": "type_retrieval",
-    "query": "What type is Blastoise?",
-    "expected_labels": ["Water"],
-    "reference_answer": "Blastoise is a Water-type Pokemon, specializing in water-based attacks and resistant to fire, ice, water, and steel-type moves."
+    "query": "What type is Butterfree?",
+    "expected_labels": ["Bug", "Flying"],
+    "reference_answer": "Butterfree is a Bug/Flying-type Pokemon, known for its large wings and ability to fly at high speeds."
   },
   {
     "id": "q013",
@@ -98,9 +98,9 @@
   {
     "id": "q014",
     "family": "type_retrieval",
-    "query": "What is the primary type of Raichu?",
-    "expected_labels": ["Electric"],
-    "reference_answer": "Raichu is an Electric-type Pokemon, evolved from Pikachu, specializing in powerful electric attacks and speed."
+    "query": "What is the primary type of Chatot?",
+    "expected_labels": ["Normal", "Flying"],
+    "reference_answer": "Chatot is a Normal/Flying-type Pokemon, known for its mimicry abilities and agile flight."
   },
   {
     "id": "q015",
@@ -112,16 +112,16 @@
   {
     "id": "q016",
     "family": "evolution_retrieval",
-    "query": "What is the evolution of Charmander?",
-    "expected_labels": ["charmeleon"],
-    "reference_answer": "Charmander evolves into Charmeleon, which is a Fire-type Pokemon that grows stronger before its final evolution into Charizard."
+    "query": "What is the evolution of Omanyte?",
+    "expected_labels": ["omastar"],
+    "reference_answer": "Omanyte evolves into Omastar, a Water/Rock-type Pokemon with a distinctive shell and powerful water-based attacks."
   },
   {
     "id": "q017",
     "family": "evolution_retrieval",
-    "query": "What Pokemon does Bulbasaur evolve into?",
-    "expected_labels": ["ivysaur"],
-    "reference_answer": "Bulbasaur evolves into Ivysaur, a Grass/Poison-type Pokemon where the bulb on its back begins to bloom."
+    "query": "What Pokemon does Metapod evolve into?",
+    "expected_labels": ["butterfree"],
+    "reference_answer": "Metapod evolves into Butterfree, a Bug/Flying-type Pokemon known for its large wings and ability to fly at high speeds."
   },
   {
     "id": "q018",
@@ -133,48 +133,48 @@
   {
     "id": "q019",
     "family": "evolution_retrieval",
-    "query": "What does Pikachu evolve into?",
-    "expected_labels": ["raichu"],
-    "reference_answer": "Pikachu evolves into Raichu, an Electric-type Pokemon with increased size, power, and more formidable electric attacks."
+    "query": "What does Drifloon evolve into?",
+    "expected_labels": ["drifblim"],
+    "reference_answer": "Drifloon evolves into Drifblim when it reaches a certain level, becoming a more powerful Ghost/Flying-type Pokemon."
   },
   {
     "id": "q020",
     "family": "evolution_retrieval",
-    "query": "Into which Pokemon does Dratini evolve?",
-    "expected_labels": ["dragonair"],
-    "reference_answer": "Dratini evolves into Dragonair, a Dragon-type Pokemon with a more serpentine form, which further evolves into the powerful Dragonite."
+    "query": "Into which Pokemon does Weedle evolve?",
+    "expected_labels": ["kakuna"],
+    "reference_answer": "Weedle evolves into Kakuna, a Bug-type Pokemon that forms a cocoon around itself before its final evolution."
   },
   {
     "id": "q021",
     "family": "evolution_image_retrieval",
     "query": "What Pokemon evolves into this one shown in the image?",
-    "query_image": "4/images/charizard.png",
-    "expected_labels": ["charmeleon"],
-    "reference_answer": "Charmeleon evolves into Charizard. Charmeleon is the intermediate Fire-type evolution between Charmander and Charizard."
+    "query_image": "4/images/kakuna.png",
+    "expected_labels": ["beedrill"],
+    "reference_answer": "Kakuna evolves into Beedrill. Beedrill is the final evolution of Weedle."
   },
   {
     "id": "q022",
     "family": "evolution_image_retrieval",
     "query": "Which Pokemon is the pre-evolution of the Pokemon shown in this image?",
-    "query_image": "4/images/blastoise.png",
-    "expected_labels": ["wartortle"],
-    "reference_answer": "Wartortle is the pre-evolution of Blastoise. It is the middle stage Water-type evolution between Squirtle and Blastoise."
+    "query_image": "4/images/cherrim.png",
+    "expected_labels": ["cherubi"],
+    "reference_answer": "Cherubi is the pre-evolution of Cherrim."
   },
   {
     "id": "q023",
     "family": "evolution_image_retrieval",
     "query": "What is the direct evolution of the Pokemon in this image?",
-    "query_image": "4/images/bulbasaur.png",
-    "expected_labels": ["ivysaur"],
-    "reference_answer": "Bulbasaur evolves into Ivysaur, where the bulb on its back develops green coloring as it prepares to bloom."
+    "query_image": "4/images/drifloon.png",
+    "expected_labels": ["drifblim"],
+    "reference_answer": "Drifloon evolves into Drifblim, becoming a more powerful Ghost/Flying-type Pokemon."
   },
   {
     "id": "q024",
     "family": "evolution_image_retrieval",
     "query": "Which Pokemon evolves from the one shown in this image?",
-    "query_image": "4/images/pikachu.png",
-    "expected_labels": ["raichu"],
-    "reference_answer": "Pikachu evolves into Raichu when exposed to a Thunder Stone, becoming a larger and more powerful Electric-type Pokemon."
+    "query_image": "4/images/caterpie.png",
+    "expected_labels": ["metapod"],
+    "reference_answer": "Caterpie evolves into Metapod, a Bug-type Pokemon."
   },
   {
     "id": "q025",

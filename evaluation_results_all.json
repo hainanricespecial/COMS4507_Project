@@ -1,0 +1,572 @@
+{
+  "results": [
+    {
+      "id": "q001",
+      "family": "image_to_name_retrieval",
+      "worker_id": 1,
+      "query": "What is the name of the Pokemon in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\fearow.png",
+      "expected_labels": [
+        "fearow"
+      ],
+      "reference_answer": "This is Fearow, a Normal/Flying-type Pokemon known for its long beak and high-speed flight.",
+      "model_answer": "**Likely Pok\u00e9mon:** pidgeot\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\pidgeot\\pidgeot.png\nAlternative nearby labels: pidgeot, pidgey, archeops\n\n**Key info:** pidgeot. Additional info: pidgeot.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q002",
+      "family": "image_to_name_retrieval",
+      "worker_id": 2,
+      "query": "Identify the Pokemon shown in this image.",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\zapdos.png",
+      "expected_labels": [
+        "zapdos"
+      ],
+      "reference_answer": "This is Zapdos, a Electric/Flying-type Pokemon and one of the legendary birds from Generation 1.",
+      "model_answer": "**Likely Pok\u00e9mon:** alakazam\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\alakazam\\alakazam.png\nAlternative nearby labels: alakazam, kadabra, manectric\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q003",
+      "family": "image_to_name_retrieval",
+      "worker_id": 3,
+      "query": "What Pokemon is depicted in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\charizard.png",
+      "expected_labels": [
+        "charizard"
+      ],
+      "reference_answer": "This is Charizard, a Fire/Flying-type Pokemon and the final evolution of Charmander.",
+      "model_answer": "**Likely Pok\u00e9mon:** charmander\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\charmander\\charmander.png\nAlternative nearby labels: charmander, druddigon, manectric\n\n**Key info:** Additional info: charmeleon\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.14606834984270645,
+      "recall": 1.0,
+      "mrr": 0.25,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q004",
+      "family": "image_to_name_retrieval",
+      "worker_id": 4,
+      "query": "Can you tell me the name of this Pokemon from the image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\dialga.png",
+      "expected_labels": [
+        "dialga"
+      ],
+      "reference_answer": "This is Dialga, a Steel/Dragon-type Pokemon and one of the Legendary beasts from Generation 4.",
+      "model_answer": "**Likely Pok\u00e9mon:** arceus\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\arceus\\arceus.png\nAlternative nearby labels: arceus, manectric, rampardos\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q005",
+      "family": "image_to_name_retrieval",
+      "worker_id": 5,
+      "query": "What is the Pokemon species shown in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\venusaur.png",
+      "expected_labels": [
+        "venusaur"
+      ],
+      "reference_answer": "This is Venusaur, a Grass/Poison-type Pokemon and the final evolution of Ivysaur.",
+      "model_answer": "**Likely Pok\u00e9mon:** ivysaur\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\ivysaur\\ivysaur.png\nAlternative nearby labels: ivysaur, hydreigon, swampert\n\n**Key info:** Additional info: venusaur\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.3391602052736161,
+      "recall": 1.0,
+      "mrr": 1.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q006",
+      "family": "name_to_image_retrieval",
+      "worker_id": 6,
+      "query": "Find an image of Dragonite.",
+      "query_image": null,
+      "expected_labels": [
+        "4/images/dragonite.png"
+      ],
+      "reference_answer": "Dragonite is a Dragon/Flying-type Pokemon and the final evolution of Dratini, known for high stats and strong combat abilities.",
+      "model_answer": "**Likely Pok\u00e9mon:** dragonair\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\dragonair\\dragonair.png\nAlternative nearby labels: dragonair, charmeleon, charmander\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q007",
+      "family": "name_to_image_retrieval",
+      "worker_id": 7,
+      "query": "Retrieve an image showing Raikou.",
+      "query_image": null,
+      "expected_labels": [
+        "4/images/raikou.png"
+      ],
+      "reference_answer": "Raikou is an Electric-type Pokemon and one of the Legendary beasts from Generation 2.",
+      "model_answer": "**Likely Pok\u00e9mon:** suicune\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\suicune\\suicune.png\nAlternative nearby labels: suicune, rattata, absol\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q008",
+      "family": "name_to_image_retrieval",
+      "worker_id": 8,
+      "query": "Show me a picture of Teddiursa.",
+      "query_image": null,
+      "expected_labels": [
+        "4/images/teddiursa.png"
+      ],
+      "reference_answer": "Teddiursa is a Normal-type Pokemon.",
+      "model_answer": "**Likely Pok\u00e9mon:** bidoof\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\bidoof\\bidoof.png\nAlternative nearby labels: bidoof, ursaring, regirock\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q009",
+      "family": "name_to_image_retrieval",
+      "worker_id": 8,
+      "query": "Find the image of Blastoise.",
+      "query_image": null,
+      "expected_labels": [
+        "4/images/blastoise.png"
+      ],
+      "reference_answer": "Blastoise is a Water-type Pokemon and the final evolution of Squirtle, characterized by cannons on its shell for water attacks.",
+      "model_answer": "**Likely Pok\u00e9mon:** wartortle\nConfidence (RRF score): 0.174\nTop match image: .tmp_index_dataset\\wartortle\\wartortle.png\nAlternative nearby labels: wartortle, blastoise, squirtle\n\n**Key info:** Additional info: blastoise\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null,
+      "error": "Could not retrieve feedback record: Execution failed on sql 'SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, :json_extract_1) IN (__[POSTCOMPILE_json_extract_2])': (sqlite3.OperationalError) no such table: trulens_events\n[SQL: SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, ?) IN (?)]\n[parameters: ('$.\"ai.observability.record_id\"', 'c0a8136d-7217-41f6-b913-78d73baa5d58')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+    },
+    {
+      "id": "q010",
+      "family": "name_to_image_retrieval",
+      "worker_id": 2,
+      "query": "Locate an image of Venusaur.",
+      "query_image": null,
+      "expected_labels": [
+        "4/images/venusaur.png"
+      ],
+      "reference_answer": "Venusaur is a Grass/Poison-type Pokemon and the final evolution of Bulbasaur, featuring a large flower bloom on its back.",
+      "model_answer": "**Likely Pok\u00e9mon:** ivysaur\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\ivysaur\\ivysaur.png\nAlternative nearby labels: ivysaur, bulbasaur, kangaskhan\n\n**Key info:** Additional info: venusaur\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null,
+      "error": "Could not retrieve feedback record: Execution failed on sql 'SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, :json_extract_1) IN (__[POSTCOMPILE_json_extract_2])': (sqlite3.OperationalError) no such table: trulens_events\n[SQL: SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, ?) IN (?)]\n[parameters: ('$.\"ai.observability.record_id\"', 'f7d37f46-32be-402d-b075-e10edc68ef4d')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+    },
+    {
+      "id": "q011",
+      "family": "type_retrieval",
+      "worker_id": 6,
+      "query": "What are the types of Charizard?",
+      "query_image": null,
+      "expected_labels": [
+        "Fire",
+        "Flying"
+      ],
+      "reference_answer": "Charizard is a Fire/Flying-type Pokemon, combining fire attacks with flying abilities and weaknesses to rock, water, and electric moves.",
+      "model_answer": "**Likely Pok\u00e9mon:** charmeleon\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\charmeleon\\charmeleon.png\nAlternative nearby labels: charmeleon, charmander, garchomp\n\n**Key info:** Additional info: charizard\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null,
+      "error": "Could not retrieve feedback record: Execution failed on sql 'SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, :json_extract_1) IN (__[POSTCOMPILE_json_extract_2])': (sqlite3.OperationalError) no such table: trulens_events\n[SQL: SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, ?) IN (?)]\n[parameters: ('$.\"ai.observability.record_id\"', '4cf3cc27-c094-4a8e-835b-96ce1c8f4a77')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+    },
+    {
+      "id": "q012",
+      "family": "type_retrieval",
+      "worker_id": 3,
+      "query": "What type is Butterfree?",
+      "query_image": null,
+      "expected_labels": [
+        "Bug",
+        "Flying"
+      ],
+      "reference_answer": "Butterfree is a Bug/Flying-type Pokemon, known for its large wings and ability to fly at high speeds.",
+      "model_answer": "**Likely Pok\u00e9mon:** butterfree\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\butterfree\\butterfree.png\nAlternative nearby labels: butterfree, metapod, flygon\n\n**Key info:** kakuna. Additional info: kakuna.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null,
+      "error": "Could not retrieve feedback record: Execution failed on sql 'SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, :json_extract_1) IN (__[POSTCOMPILE_json_extract_2])': (sqlite3.OperationalError) no such table: trulens_events\n[SQL: SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, ?) IN (?)]\n[parameters: ('$.\"ai.observability.record_id\"', 'cd784216-5bfc-4604-813b-382de9cd3cb1')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+    },
+    {
+      "id": "q013",
+      "family": "type_retrieval",
+      "worker_id": 7,
+      "query": "What are the type(s) of Venusaur?",
+      "query_image": null,
+      "expected_labels": [
+        "Grass",
+        "Poison"
+      ],
+      "reference_answer": "Venusaur is a Grass/Poison-type Pokemon, combining plant-based attacks with poison abilities and weaknesses to fire, flying, and ice moves.",
+      "model_answer": "**Likely Pok\u00e9mon:** ivysaur\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\ivysaur\\ivysaur.png\nAlternative nearby labels: ivysaur, type null, bulbasaur\n\n**Key info:** Additional info: venusaur\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null,
+      "error": "Could not retrieve feedback record: Execution failed on sql 'SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, :json_extract_1) IN (__[POSTCOMPILE_json_extract_2])': (sqlite3.OperationalError) no such table: trulens_events\n[SQL: SELECT trulens_events.record, trulens_events.event_id, trulens_events.record_attributes, trulens_events.record_type, trulens_events.resource_attributes, trulens_events.start_timestamp, trulens_events.timestamp, trulens_events.trace \nFROM trulens_events \nWHERE json_extract(trulens_events.record_attributes, ?) IN (?)]\n[parameters: ('$.\"ai.observability.record_id\"', '43d401f4-8e87-4034-8147-37a78178b577')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+    },
+    {
+      "id": "q014",
+      "family": "type_retrieval",
+      "worker_id": 8,
+      "query": "What is the primary type of Chatot?",
+      "query_image": null,
+      "expected_labels": [
+        "Normal",
+        "Flying"
+      ],
+      "reference_answer": "Chatot is a Normal/Flying-type Pokemon, known for its mimicry abilities and agile flight.",
+      "model_answer": "**Likely Pok\u00e9mon:** chatot\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\chatot\\chatot.png\nAlternative nearby labels: chatot, type null, castform\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q015",
+      "family": "type_retrieval",
+      "worker_id": 7,
+      "query": "What types does Gyarados have?",
+      "query_image": null,
+      "expected_labels": [
+        "Water",
+        "Flying"
+      ],
+      "reference_answer": "Gyarados is a Water/Flying-type Pokemon with high attack stats, combining water moves with aerial capabilities.",
+      "model_answer": "**Likely Pok\u00e9mon:** gyarados\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\gyarados\\gyarados.png\nAlternative nearby labels: gyarados, druddigon, magikarp\n\n**Key info:** cubchoo. Additional info: cubchoo.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q016",
+      "family": "evolution_retrieval",
+      "worker_id": 2,
+      "query": "What is the evolution of Omanyte?",
+      "query_image": null,
+      "expected_labels": [
+        "omastar"
+      ],
+      "reference_answer": "Omanyte evolves into Omastar, a Water/Rock-type Pokemon with a distinctive shell and powerful water-based attacks.",
+      "model_answer": "**Likely Pok\u00e9mon:** omanyte\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\omanyte\\omanyte.png\nAlternative nearby labels: omanyte, tentacool, omastar\n\n**Key info:** Additional info: archeops\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.16958010263680806,
+      "recall": 1.0,
+      "mrr": 0.3333333333333333,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q017",
+      "family": "evolution_retrieval",
+      "worker_id": 6,
+      "query": "What Pokemon does Metapod evolve into?",
+      "query_image": null,
+      "expected_labels": [
+        "butterfree"
+      ],
+      "reference_answer": "Metapod evolves into Butterfree, a Bug/Flying-type Pokemon known for its large wings and ability to fly at high speeds.",
+      "model_answer": "**Likely Pok\u00e9mon:** metapod\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\metapod\\metapod.png\nAlternative nearby labels: metapod, caterpie, flygon\n\n**Key info:** Additional info: butterfree\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.3391602052736161,
+      "recall": 1.0,
+      "mrr": 1.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q018",
+      "family": "evolution_retrieval",
+      "worker_id": 3,
+      "query": "What is the next evolution of Squirtle?",
+      "query_image": null,
+      "expected_labels": [
+        "wartortle"
+      ],
+      "reference_answer": "Squirtle evolves into Wartortle, a Water-type Pokemon that develops more defined features and ears before its final evolution into Blastoise.",
+      "model_answer": "**Likely Pok\u00e9mon:** squirtle\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\squirtle\\squirtle.png\nAlternative nearby labels: squirtle, wartortle, turtwig\n\n**Key info:** Additional info: wartortle\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.5531464700081437,
+      "recall": 1.0,
+      "mrr": 1.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q019",
+      "family": "evolution_retrieval",
+      "worker_id": 5,
+      "query": "What does Drifloon evolve into?",
+      "query_image": null,
+      "expected_labels": [
+        "drifblim"
+      ],
+      "reference_answer": "Drifloon evolves into Drifblim when it reaches a certain level, becoming a more powerful Ghost/Flying-type Pokemon.",
+      "model_answer": "**Likely Pok\u00e9mon:** drifloon\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\drifloon\\drifloon.png\nAlternative nearby labels: drifloon, drifblim, tentacool\n\n**Key info:** dodrio. Additional info: dodrio.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.21398626473452756,
+      "recall": 1.0,
+      "mrr": 0.5,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q020",
+      "family": "evolution_retrieval",
+      "worker_id": 4,
+      "query": "Into which Pokemon does Weedle evolve?",
+      "query_image": null,
+      "expected_labels": [
+        "kakuna"
+      ],
+      "reference_answer": "Weedle evolves into Kakuna, a Bug-type Pokemon that forms a cocoon around itself before its final evolution.",
+      "model_answer": "**Likely Pok\u00e9mon:** weedle\nConfidence (RRF score): 0.182\nTop match image: .tmp_index_dataset\\weedle\\weedle.png\nAlternative nearby labels: weedle, pinsir, omanyte\n\n**Key info:** kakuna. Additional info: kakuna.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.3391602052736161,
+      "recall": 1.0,
+      "mrr": 1.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q021",
+      "family": "evolution_image_retrieval",
+      "worker_id": 1,
+      "query": "What Pokemon evolves into this one shown in the image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\kakuna.png",
+      "expected_labels": [
+        "beedrill"
+      ],
+      "reference_answer": "Kakuna evolves into Beedrill. Beedrill is the final evolution of Weedle.",
+      "model_answer": "**Likely Pok\u00e9mon:** butterfree\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\butterfree\\butterfree.png\nAlternative nearby labels: butterfree, weedle, burmy\n\n**Key info:** kakuna. Additional info: kakuna.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.14606834984270645,
+      "recall": 1.0,
+      "mrr": 0.25,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q022",
+      "family": "evolution_image_retrieval",
+      "worker_id": 6,
+      "query": "Which Pokemon is the pre-evolution of the Pokemon shown in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\cherrim.png",
+      "expected_labels": [
+        "cherubi"
+      ],
+      "reference_answer": "Cherubi is the pre-evolution of Cherrim.",
+      "model_answer": "**Likely Pok\u00e9mon:** oricorio baile\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\oricorio-baile\\oricorio-baile.png\nAlternative nearby labels: oricorio baile, cherrim, oranguru\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q023",
+      "family": "evolution_image_retrieval",
+      "worker_id": 8,
+      "query": "What is the direct evolution of the Pokemon in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\drifloon.png",
+      "expected_labels": [
+        "drifblim"
+      ],
+      "reference_answer": "Drifloon evolves into Drifblim, becoming a more powerful Ghost/Flying-type Pokemon.",
+      "model_answer": "**Likely Pok\u00e9mon:** drifloon\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\drifloon\\drifloon.png\nAlternative nearby labels: drifloon, drifblim, tentacool\n\n**Key info:** dodrio. Additional info: dodrio.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.21398626473452756,
+      "recall": 1.0,
+      "mrr": 0.5,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q024",
+      "family": "evolution_image_retrieval",
+      "worker_id": 2,
+      "query": "Which Pokemon evolves from the one shown in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\caterpie.png",
+      "expected_labels": [
+        "metapod"
+      ],
+      "reference_answer": "Caterpie evolves into Metapod, a Bug-type Pokemon.",
+      "model_answer": "**Likely Pok\u00e9mon:** caterpie\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\caterpie\\caterpie.png\nAlternative nearby labels: caterpie, weedle, tropius\n\n**Key info:** metapod. Additional info: metapod.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.3391602052736161,
+      "recall": 1.0,
+      "mrr": 1.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    },
+    {
+      "id": "q025",
+      "family": "evolution_image_retrieval",
+      "worker_id": 3,
+      "query": "What is the pre-evolution of the Pokemon depicted in this image?",
+      "query_image": "D:\\UQ Cyber Security Sem 1 2026\\Adv Sec\\RAG Project (With Poisioning)\\4\\images\\dragonite.png",
+      "expected_labels": [
+        "dragonair"
+      ],
+      "reference_answer": "Dragonair is the pre-evolution of Dragonite. Dragonair evolves into Dragonite at level 55, gaining the Dragon/Flying typing.",
+      "model_answer": "**Likely Pok\u00e9mon:** archeops\nConfidence (RRF score): 0.091\nTop match image: .tmp_index_dataset\\archeops\\archeops.png\nAlternative nearby labels: archeops, nidoqueen, druddigon\n\n**Key info:** No extra descriptive information is available for this label.\nEvidence: [R1], [R2], [R3]\n\n**Next step:** Confirm this match against the image or query details.",
+      "ndcg": 0.0,
+      "recall": 0.0,
+      "mrr": 0.0,
+      "answer_relevance": null,
+      "context_relevance": null,
+      "groundedness": null
+    }
+  ],
+  "summary": {
+    "avg_ndcg": 0.11197906491575538,
+    "avg_recall": 0.4,
+    "avg_mrr": 0.2733333333333333,
+    "avg_answer_relevance": null,
+    "avg_context_relevance": null,
+    "avg_groundedness": null,
+    "total_queries": 25,
+    "max_workers": 8
+  },
+  "trulens_leaderboard": [
+    {
+      "Answer Relevance Worker 1": 0.16666666666666666,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.312238,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": 0.16666666666666666,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.2565305,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": 0.3333333333333333,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.237904,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": 0.25,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.2548935,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": 0.0,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.25542549999999997,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": 0.26666666666666666,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.20973899999999998,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": 0.0,
+      "Answer Relevance Worker 8": NaN,
+      "latency": 0.15826949999999998,
+      "total_cost": 0.0
+    },
+    {
+      "Answer Relevance Worker 1": NaN,
+      "Answer Relevance Worker 2": NaN,
+      "Answer Relevance Worker 3": NaN,
+      "Answer Relevance Worker 4": NaN,
+      "Answer Relevance Worker 5": NaN,
+      "Answer Relevance Worker 6": NaN,
+      "Answer Relevance Worker 7": NaN,
+      "Answer Relevance Worker 8": 0.06666666666666667,
+      "latency": 0.2031012,
+      "total_cost": 0.0
+    }
+  ]
+}

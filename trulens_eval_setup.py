@@ -508,7 +508,7 @@ def main() -> None:
     leaderboard_df = session.get_leaderboard()
     print(leaderboard_df)
 
-    output_file = root / "evaluation_results.json"
+    output_file = root / "evaluation_results_base.json"
     with output_file.open("w", encoding="utf-8") as f:
         json.dump({
             "results": results,

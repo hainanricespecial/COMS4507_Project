@@ -24,7 +24,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--text-csv",
-        default="4/pokemon.csv",
+        default="4POISONEDCONFLICT/pokemon.csv",
         help="Optional CSV file describing images and labels (relative to root).",
     )
     parser.add_argument(

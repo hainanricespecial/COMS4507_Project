@@ -29,6 +29,43 @@ from transformers import (
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 load_dotenv()
+
+
+def _repair_invalid_ssl_cert_env() -> None:
+    invalid_vars = []
+    for name in ("SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE"):
+        value = os.environ.get(name)
+        if value and not Path(value).expanduser().exists():
+            invalid_vars.append(name)
+
+    if not invalid_vars:
+        return
+
+    try:
+        import certifi
+
+        cert_path = certifi.where()
+        if not Path(cert_path).exists():
+            raise FileNotFoundError(cert_path)
+        for name in invalid_vars:
+            os.environ[name] = cert_path
+        warnings.warn(
+            "Replaced invalid certificate environment variable(s) "
+            f"{', '.join(invalid_vars)} with certifi bundle: {cert_path}",
+            RuntimeWarning,
+        )
+    except Exception as exc:
+        for name in invalid_vars:
+            os.environ.pop(name, None)
+        warnings.warn(
+            "Removed invalid certificate environment variable(s) "
+            f"{', '.join(invalid_vars)} because certifi could not be used: {exc}",
+            RuntimeWarning,
+        )
+
+
+_repair_invalid_ssl_cert_env()
+
 # becareful with case sensitivity in model names
 HF_TOKEN = os.getenv("HF_TOKEN")
 DEFAULT_MODEL = os.getenv("HF_MODEL_NAME", "openai/clip-vit-base-patch16").strip()

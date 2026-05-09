@@ -4,6 +4,8 @@ from trulens.core.otel.instrument import instrument
 from trulens.core.feedback.selector import Selector
 from trulens.otel.semconv.trace import SpanAttributes
 from trulens.apps.custom import TruCustomApp
+import json
+
 from trulens.providers.litellm import LiteLLM
 
 from local_agent import PokemonMultimodalAgent, GenerationConfig
@@ -94,15 +96,33 @@ tru_agent = TruCustomApp(
     feedbacks=[f_answer_relevance, f_context_relevance, f_groundedness],
 )
 
-# ── 6. Run a query ────────────────────────────────────────────────────────────
+# ── 6. Run benchmark queries from JSON ───────────────────────────────────────
 cfg = RetrievalConfig(mode="hybrid", top_k=5)
+benchmark_path = root / "benchmark_queries.json"
+
+with benchmark_path.open("r", encoding="utf-8") as f:
+    benchmark_queries = json.load(f)
 
 with tru_agent as recording:
-    result = agent.invoke(
-        query="What type is Charizard?",
-        query_image_path=None,
-        retrieval_config=cfg,
-    )
+    for item in benchmark_queries:
+        query = item.get("query")
+        query_image = item.get("query_image")
 
-print(result["answer"])
+        query_image_path = str(root / query_image) if query_image is not None else None
+
+        result = agent.invoke(
+            query=query,
+            query_image_path=query_image_path,
+            retrieval_config=cfg,
+        )
+
+        print("\n=== Query ID: {} | Family: {} ===".format(item.get("id"), item.get("family")))
+        print("Query:", query)
+        if query_image_path:
+            print("Image:", query_image_path)
+        print("Expected labels:", item.get("expected_labels"))
+        print("Reference answer:", item.get("reference_answer"))
+        print("Model answer:", result.get("answer", result))
+
+print("\nLeaderboard:")
 session.get_leaderboard()

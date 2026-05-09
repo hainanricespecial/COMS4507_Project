@@ -1,16 +1,36 @@
+import json
 import numpy as np
 from trulens.core import TruSession, Feedback
 from trulens.core.otel.instrument import instrument
 from trulens.core.feedback.selector import Selector
 from trulens.otel.semconv.trace import SpanAttributes
 from trulens.apps.custom import TruCustomApp
-import json
-
 from trulens.providers.litellm import LiteLLM
 
 from local_agent import PokemonMultimodalAgent, GenerationConfig
 from vector_store import MultimodalChromaStore, RetrievalConfig
 from pathlib import Path
+
+# ── Metric functions ─────────────────────────────────────────────────────────
+def ndcg_at_k(relevances, k):
+    if not relevances:
+        return 0.0
+    dcg = 0.0
+    for i in range(min(k, len(relevances))):
+        dcg += relevances[i] / np.log2(i + 2)
+    idcg = sum(1 / np.log2(i + 2) for i in range(min(k, len(relevances))))
+    return dcg / idcg if idcg > 0 else 0.0
+
+def recall_at_k(relevances, k):
+    relevant_retrieved = sum(relevances[:k])
+    total_relevant = sum(relevances)
+    return relevant_retrieved / total_relevant if total_relevant > 0 else 0.0
+
+def mrr_at_k(relevances, k):
+    for i in range(min(k, len(relevances))):
+        if relevances[i] > 0:
+            return 1.0 / (i + 1)
+    return 0.0
 
 # ── 1. TruLens session ──────────────────────────────────────────────────────
 session = TruSession()
@@ -103,10 +123,15 @@ benchmark_path = root / "benchmark_queries.json"
 with benchmark_path.open("r", encoding="utf-8") as f:
     benchmark_queries = json.load(f)
 
+ndcg_scores = []
+recall_scores = []
+mrr_scores = []
+
 with tru_agent as recording:
     for item in benchmark_queries:
         query = item.get("query")
         query_image = item.get("query_image")
+        expected_labels = item.get("expected_labels", [])
 
         query_image_path = str(root / query_image) if query_image is not None else None
 
@@ -116,13 +141,33 @@ with tru_agent as recording:
             retrieval_config=cfg,
         )
 
+        # Compute metrics
+        retrieved_contexts = result.get("retrieved_contexts", [])
+        relevances = [1 if any(label.lower() in str(context).lower() for label in expected_labels) else 0 for context in retrieved_contexts]
+        k = cfg.top_k
+        ndcg = ndcg_at_k(relevances, k)
+        recall = recall_at_k(relevances, k)
+        mrr = mrr_at_k(relevances, k)
+
+        ndcg_scores.append(ndcg)
+        recall_scores.append(recall)
+        mrr_scores.append(mrr)
+
         print("\n=== Query ID: {} | Family: {} ===".format(item.get("id"), item.get("family")))
         print("Query:", query)
         if query_image_path:
             print("Image:", query_image_path)
-        print("Expected labels:", item.get("expected_labels"))
+        print("Expected labels:", expected_labels)
         print("Reference answer:", item.get("reference_answer"))
         print("Model answer:", result.get("answer", result))
+        print("NDCG@{}: {:.4f}".format(k, ndcg))
+        print("Recall@{}: {:.4f}".format(k, recall))
+        print("MRR@{}: {:.4f}".format(k, mrr))
+
+print("\nAverage Metrics:")
+print("Avg NDCG@{}: {:.4f}".format(k, np.mean(ndcg_scores)))
+print("Avg Recall@{}: {:.4f}".format(k, np.mean(recall_scores)))
+print("Avg MRR@{}: {:.4f}".format(k, np.mean(mrr_scores)))
 
 print("\nLeaderboard:")
 session.get_leaderboard()

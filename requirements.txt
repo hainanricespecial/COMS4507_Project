@@ -224,6 +224,7 @@ trulens-core==2.8.0
 trulens-dashboard==2.8.0
 trulens-feedback==2.8.0
 trulens-otel-semconv==2.8.0
+trulens-providers-litellm==2.8.0
 trulens_eval==2.8.0
 typer==0.24.1
 typing-inspection==0.4.2
